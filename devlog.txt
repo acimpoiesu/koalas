@@ -7,3 +7,6 @@ alexandruC -- 2026-05-01 10:36
 shafinK -- 2026-05-05 10:38
  - added design.md 
  - added tnpg + roster + project name + description to design
+
+shafinK -- 2026-05-05 10:47
+- added login, register, auth components to design
