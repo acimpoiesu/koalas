@@ -3,3 +3,7 @@ alexandruC -- 2026-05-01 10:36
   Serve multiple apps concurrently? NO
   Flask
   Has any team member provisioned SSL certificates to facilitate httpS traffic? YES
+
+shafinK -- 2026-05-05 10:38
+ - added design.md 
+ - added tnpg + roster + project name + description to design
