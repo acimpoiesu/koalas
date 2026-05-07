@@ -13,3 +13,6 @@ shafinK -- 2026-05-05 10:47
 
 alexandruC -- 2026-05-07 10:33
 - added new template for the design.md
+
+alexandruC -- 2026-05-07 10:46
+- started filling out template & table with reused data
