@@ -34,6 +34,7 @@ The goal of Better Talos is to help inform Stuy students inform themselves on th
 
 
 
+
 	# System Blueprint (_a.k.a._ "Design Doc")
 
 	## TNPG: koalas
@@ -47,10 +48,10 @@ The goal of Better Talos is to help inform Stuy students inform themselves on th
 
 	| Name | Email | Primary Role | Secondary Role |
 	|---|---|---|---|
-	|Alexandru Cimpoiesu|alexandruc4@nycstudents.net | | |
-	|Shafin Kazi |shafink3@nycstudents.net | | |
-	|Mustafa Abdullah|mustafaa80@nycstudents.net | | |
-	|Jalen Chen|jalenc60@nycstudents.net | | |
+	|Alexandru Cimpoiesu|alexandruc4@nycstudents.net | Database organizer/parser | Grade prediction algorithm developer |
+	|Shafin Kazi |shafink3@nycstudents.net | Javascript  | (Secondary) frontend designer  |
+	|Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS |(Secondary) frontend designer  |
+	|Jalen Chen|jalenc60@nycstudents.net | Frontend designer  | Secondary database parser  |
 
 	---
 
@@ -65,14 +66,15 @@ The goal of Better Talos is to help inform Stuy students inform themselves on th
 
 Who will use this system?
 
-- ____________________________________
-- ____________________________________
+- Current Stuyvesant students 
+- Current Stuyvesant administration (guidance counselors, program office)
 
 
 ## Why This Project Matters
 
+The project would help students better map out their academic path over the course of their 4 years at Stuyvesant as opposed to the current rudimentary system of blindly picking courses through Talos.
 
----
+--- 
 
 # Minimum Viable Product (MVP) Scope
 
