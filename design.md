@@ -51,14 +51,14 @@ The goal of Better Talos is to help inform Stuy students inform themselves on th
 	|---|---|---|---|
 	| Alexandru Cimpoiesu|alexandruc4@nycstudents.net | Database organizer/parser | Grade prediction algorithm developer |
 	| Shafin Kazi |shafink3@nycstudents.net | Javascript  | (Secondary) frontend designer  |
-	| Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS |(Secondary) frontend designer  |
+	| Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS | Middleware manager  |
 	| Jalen Chen|jalenc60@nycstudents.net | Frontend designer  | Secondary database parser  |
 
 	---
 
 
 # Summary
-Better Talos is to help inform Stuy students inform themselves on their classes (e.g. course rigor, course requirements, teacher evaluation, etc) and engage in public forms to discuss all things Stuy. 
+Better Talos is to help inform Stuy students inform themselves on their classes (e.g. course rigor, course requirements, teacher evaluation, etc) and engage in public forums to discuss all things Stuy. 
 
 ## Problem Being Solved
 Talos does not present all of the information that students might need in an easy/meaningful way. Students might have to socialize with others in order to gleam information about courses/teachers and better inform themselves on which classes to take or not to take. 
@@ -87,7 +87,7 @@ Features that **must** be completed:
 
 ## Stretch Features (Only if MVP is Complete)
 1. Class Grade predictor 
-2. 
+2. idk something 
 
 ## Explicit Non-Goals
 
@@ -146,7 +146,7 @@ Dashboard
 
 ## Key User Stories
 ### eg0
-As a __________, I want to __________ so that...
+As a **student**, I want to __________ so that...
 
 ### eg1
 As a __________, I want to __________ so that...
@@ -159,6 +159,8 @@ As a __________, I want to __________ so that...
 # Database Design
 
 {Insert your table/document organizational structure here}
+
+
 
 
 # Testing Plan
@@ -174,9 +176,9 @@ As a __________, I want to __________ so that...
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
 Project is considered complete when all of the following are true:
-1.
-1.
-1.
+1. Meet all MVP requirements 
+2. Happy and ready to graduate >w<
+
 
 # Open Questions
 {Delineate anything undecided here}
