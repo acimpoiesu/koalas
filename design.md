@@ -87,7 +87,7 @@ Features that **must** be completed:
 
 ## Stretch Features (Only if MVP is Complete)
 1. Class Grade predictor 
-2. idk something 
+2. 
 
 ## Explicit Non-Goals
 
