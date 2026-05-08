@@ -1,4 +1,5 @@
 
+
 **koalas**
 
 > Alexandru Cimpoiesu (PM), Shafin Kazi, Mustafa Abdullah, Jalen Chen
@@ -38,7 +39,7 @@ The goal of Better Talos is to help inform Stuy students inform themselves on th
 	# System Blueprint (_a.k.a._ "Design Doc")
 
 	## TNPG: koalas
-	## project: Better talos
+	## project: Better Talos
 	## Target ship date: {2026-06-15}
 
 	---
@@ -48,19 +49,19 @@ The goal of Better Talos is to help inform Stuy students inform themselves on th
 
 	| Name | Email | Primary Role | Secondary Role |
 	|---|---|---|---|
-	|Alexandru Cimpoiesu|alexandruc4@nycstudents.net | Database organizer/parser | Grade prediction algorithm developer |
-	|Shafin Kazi |shafink3@nycstudents.net | Javascript  | (Secondary) frontend designer  |
-	|Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS |(Secondary) frontend designer  |
-	|Jalen Chen|jalenc60@nycstudents.net | Frontend designer  | Secondary database parser  |
+	| Alexandru Cimpoiesu|alexandruc4@nycstudents.net | Database organizer/parser | Grade prediction algorithm developer |
+	| Shafin Kazi |shafink3@nycstudents.net | Javascript  | (Secondary) frontend designer  |
+	| Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS |(Secondary) frontend designer  |
+	| Jalen Chen|jalenc60@nycstudents.net | Frontend designer  | Secondary database parser  |
 
 	---
 
 
 # Summary
-{Keep it tight. Concise. 1 sentence. Really need more? 3 max.}
+Better Talos is to help inform Stuy students inform themselves on their classes (e.g. course rigor, course requirements, teacher evaluation, etc) and engage in public forms to discuss all things Stuy. 
 
 ## Problem Being Solved
-
+Talos does not present all of the information that students might need in an easy/meaningful way. Students might have to socialize with others in order to gleam information about courses/teachers and better inform themselves on which classes to take or not to take. 
 
 ## Target Users
 
@@ -80,19 +81,18 @@ The project would help students better map out their academic path over the cour
 
 ## Core Features (Required for Final Submission)
 Features that **must** be completed:
-1.
-1.
-1.
+1. Online message board for discussion
+2. Information on each course and teacher
+3. Prerequisites for each course 
 
 ## Stretch Features (Only if MVP is Complete)
-1.
-1.
-1.
+1. Class Grade predictor 
+2. idk something 
 
 ## Explicit Non-Goals
 
 Features intentionally excluded:
--
+- 
 -
 
 ---
@@ -101,14 +101,14 @@ Features intentionally excluded:
 
 | Layer | Selected Tool |
 |---|---|
-| Backend Framework | Flask / Node.js (choose one) |
-| Frontend Framework | none / bootstrap / foundation / tailwind / other? (seek clearance) |
-| Database | SQLite / MongoDB |
-| Authentication | Flask sessions unless you have good reason/need to deviate |
-| ORM / DB Library | optionally SQLAlchemy; initiate clearance protocol if interested |
+| Backend Framework | Flask |
+| Frontend Framework | tailwind |
+| Database | SQLite|
+| Authentication | Flask sessions |
+| ORM / DB Library | N/A |
 
 ## Why This Stack Was Chosen
-{your summary/recap of team discussions here}
+We chose most of these options because they are what we are most comfortable and familiar with. Tailwind offers easy, customizable, and lightweight designing. 
 
 ---
 
@@ -118,10 +118,10 @@ Each member must own meaningful deliverables.
 
 | Team Member | Primary Ownership | Secondary Ownership | Specific Deliverables |
 |---|---|---|---|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
+| Alexandru | | | |
+| Shafin | | | |
+| 'Stafa | | | |
+| Jalen | | | |
 
 ---
 
@@ -186,3 +186,4 @@ Project is considered complete when all of the following are true:
 
 # Other
 {Put here anything that did not sensibly fit under above headings. This section will inform evolution of SoftDev.}
+
