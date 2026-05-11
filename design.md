@@ -135,25 +135,26 @@ Each member must own meaningful deliverables.
 {Insert your mermaid(or equivalent)-generated diagram here}
 eg...
 ```
-Landing Page
-   ↓
-Login / Register
-   ↓
-Dashboard
-   ├── Feature A
-   ├── Feature B
-   └── Profile
-```
+graph TD
+    Landing[Landing Page] --> Login[Login / Register]
+    Login --> Dashboard[Main Dashboard]
+    Dashboard --> Catalog[Course Catalog & Prereq Graph]
+    Dashboard --> Planner[4-Year Schedule Planner]
+    Dashboard --> Reviews[Course Review Forums]
+    Planner --> Simulator[GPA & Workload Simulator]
+    Dashboard --> Profile[User Profile & Settings]```
 
 ## Key User Stories
 ### eg0
-As a **student**, I want to __________ so that...
+As a **student**, I want to visualize course prerequisites as a graph so that I can see the fastest path to advanced classes without missing required courses.
 
 ### eg1
-As a __________, I want to __________ so that...
+As a student, I want to simulate my projected workload and gpa so that I can take classes that are well suited
+for me without too much burnout. 
 
 ### eg2
-As a __________, I want to __________ so that...
+As a user, I want to filter course reviews by tags so that I can select classes that align with my personal
+preferences.
 
 
 
@@ -165,7 +166,10 @@ As a __________, I want to __________ so that...
 
 
 # Testing Plan
-{Delineate here your plan for testing each component}
+- Use unit tests to validate that prereqs are working properly.
+- Verify prereq data to make sure no dependencies are circular
+-Make sure routes work and fix server errors before 
+pushing to our "prod" environment.
 
 # Timeline
 ## Week 1 Goals:
