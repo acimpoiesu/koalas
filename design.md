@@ -105,6 +105,7 @@ Features intentionally excluded:
 | Frontend Framework | tailwind |
 | Database | SQLite|
 | Authentication | Flask sessions |
+| Data viz | d3.js |
 | ORM / DB Library | N/A |
 
 ## Why This Stack Was Chosen
@@ -168,11 +169,20 @@ As a __________, I want to __________ so that...
 
 # Timeline
 ## Week 1 Goals:
+- Courses & Prereqs data
+- flask app & sqlite db
+- basic frontend created.
 ## Week 2 Goals:
+- d3.js graph created using courses & prereqs data
+- frontend UI for a drag & drop planner
 ## Week 3 Goals:
+- connect drag and drop planner to a backend validator
+- integrate the workload/GPA prediction algorithms based on database review aggregates
 ## Internal Deadlines:
-{List milestones your team has identified, in the order they must be completed. Set a target completion date for each.}
-
+- May 25: MVP: All core routing + db functionality + primary UI
+- June 2: Stretch features deadline.
+-June 10: Full bug squashing
+-June 15: Target Ship
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
 Project is considered complete when all of the following are true:
@@ -181,7 +191,7 @@ Project is considered complete when all of the following are true:
 
 
 # Open Questions
-{Delineate anything undecided here}
+- How are we going to get data for this?
 
 # Appendix
 {Any relevant info that is useful but would have interrupted narrative flow above, or cluttered the information portrayed}
