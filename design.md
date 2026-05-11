@@ -87,13 +87,13 @@ Features that **must** be completed:
 
 ## Stretch Features (Only if MVP is Complete)
 1. Class Grade predictor 
-2. idk something 
+2.  Workload difficulty predictor (number of hours hw)
 
 ## Explicit Non-Goals
 
 Features intentionally excluded:
-- 
--
+-  Real-time collaborative schedule editing
+-  Direct integration/authentication with official DOE or Stuyvesant administrative servers
 
 ---
 
