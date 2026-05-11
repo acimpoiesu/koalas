@@ -19,3 +19,6 @@ alexandruC -- 2026-05-07 10:46
 
 mustafaA -- 2026-05-07 10:58
 - filled out tentative team roles + userbase section on design doc
+
+alexandruC -- 2026-05-07 10:46
+- added non-goals and stretch goals
