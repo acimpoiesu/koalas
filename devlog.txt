@@ -34,3 +34,6 @@ alexandruC -- 2026-05-11 4:24
 
 alexandruC -- 2026-05-11 4:24
 - added database design
+
+alexandruC -- 2026-05-11 5:02
+- finished design doc

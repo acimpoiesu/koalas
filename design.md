@@ -11,10 +11,10 @@
 
 	| Name | Email | Primary Role | Secondary Role |
 	|---|---|---|---|
-	| Alexandru Cimpoiesu|alexandruc4@nycstudents.net | Database organizer/parser | Grade prediction algorithm developer |
-	| Shafin Kazi |shafink3@nycstudents.net | Javascript  | (Secondary) frontend designer  |
-	| Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS | Middleware manager  |
-	| Jalen Chen|jalenc60@nycstudents.net | Frontend designer  | Secondary database parser  |
+	| Alexandru Cimpoiesu|alexandruc4@nycstudents.net| Database organizer/parser|Grade prediction algorithm developer|
+	| Shafin Kazi |shafink3@nycstudents.net| Javascript | (Secondary) frontend designer |
+	| Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS | Middleware manager |
+	| Jalen Chen|jalenc60@nycstudents.net | Frontend designer | Secondary database parser |
 
 	---
 
@@ -90,23 +90,16 @@ Each member must own meaningful deliverables.
 
 # Component map
 
-{Insert your mermaid(or equivalent)-generated diagram here}
+![Component Map](component.png)
 
 # Site map
 
-![Site Map](Screenshot 2026-05-11 at 4.17.16 AM.png)
-```
-Landing Page
-   ↓
-Login / Register
-   ↓
-Dashboard
-   ├── Feature A
-   ├── Feature B
-   └── Profile
-```
+![Site Map](site.png)
+
+---
 
 ## Key User Stories
+
 ### eg0
 As a **student**, I want to visualize course prerequisites as a graph so that I can see the fastest path to advanced classes without missing required courses.
 
@@ -142,17 +135,20 @@ pushing to our "prod" environment.
 - Courses & Prereqs data
 - flask app & sqlite db
 - basic frontend created.
+
 ## Week 2 Goals:
 - d3.js graph created using courses & prereqs data
 - frontend UI for a drag & drop planner
+
 ## Week 3 Goals:
 - connect drag and drop planner to a backend validator
 - integrate the workload/GPA prediction algorithms based on database review aggregates
+
 ## Internal Deadlines:
 - May 25: MVP: All core routing + db functionality + primary UI
 - June 2: Stretch features deadline.
--June 10: Full bug squashing
--June 15: Target Ship
+- June 10: Full bug squashing
+- June 15: Target Ship
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
 Project is considered complete when all of the following are true:
@@ -164,8 +160,9 @@ Project is considered complete when all of the following are true:
 - How are we going to get data for this?
 
 # Appendix
-{Any relevant info that is useful but would have interrupted narrative flow above, or cluttered the information portrayed}
-
-# Other
-{Put here anything that did not sensibly fit under above headings. This section will inform evolution of SoftDev.}
-
+Workload Algorithm:
+- It will probably be something simple like 
+(Sum of predicted course hours) * User Speed
+User speed will be calculated by performance above
+or below average on assignments. Self-reported if no
+data.
