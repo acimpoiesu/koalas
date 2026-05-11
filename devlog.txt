@@ -26,5 +26,8 @@ alexandruC -- 2026-05-11 3:46
 alexandruC -- 2026-05-11 4:02
 - added Timeline with internal deadlines
 
-alexandruC -- 2026-05-11 4:02
+alexandruC -- 2026-05-11 4:15
 - added keyUser stories and site map
+
+alexandruC -- 2026-05-11 4:24
+- added team ownership plan

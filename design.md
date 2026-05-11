@@ -119,10 +119,10 @@ Each member must own meaningful deliverables.
 
 | Team Member | Primary Ownership | Secondary Ownership | Specific Deliverables |
 |---|---|---|---|
-| Alexandru | | | |
-| Shafin | | | |
-| 'Stafa | | | |
-| Jalen | | | |
+| Alexandru | DB & core algorithms | Data viz|parsing course catalog data, developing the GPA/Workload prediction algorithms, and implementing the d3.js prerequisite tree visualizations |
+| Shafin | Frontend + DOM Manipulation| UI/UX| Building the drag and drop JavaScript logic for the 4 year planner, managing frontend state|
+| 'Stafa | Backend Routing & API Endpoints| Middleware + auth| making flask routes, handling Flask session authentication and validating schedule constraints|
+| Jalen | UI/UX | Data parsing | Tailwind + create visual layout |
 
 ---
 
@@ -132,17 +132,17 @@ Each member must own meaningful deliverables.
 
 # Site map
 
-{Insert your mermaid(or equivalent)-generated diagram here}
-eg...
+![Site Map](Screenshot 2026-05-11 at 4.17.16 AM.png)
 ```
-graph TD
-    Landing[Landing Page] --> Login[Login / Register]
-    Login --> Dashboard[Main Dashboard]
-    Dashboard --> Catalog[Course Catalog & Prereq Graph]
-    Dashboard --> Planner[4-Year Schedule Planner]
-    Dashboard --> Reviews[Course Review Forums]
-    Planner --> Simulator[GPA & Workload Simulator]
-    Dashboard --> Profile[User Profile & Settings]```
+Landing Page
+   ↓
+Login / Register
+   ↓
+Dashboard
+   ├── Feature A
+   ├── Feature B
+   └── Profile
+```
 
 ## Key User Stories
 ### eg0
