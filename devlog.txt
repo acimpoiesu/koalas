@@ -31,3 +31,6 @@ alexandruC -- 2026-05-11 4:15
 
 alexandruC -- 2026-05-11 4:24
 - added team ownership plan
+
+alexandruC -- 2026-05-11 4:24
+- added database design

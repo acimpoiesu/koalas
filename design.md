@@ -1,41 +1,3 @@
-
-
-**koalas**
-
-> Alexandru Cimpoiesu (PM), Shafin Kazi, Mustafa Abdullah, Jalen Chen
-
-**Ship Date:** 2026-06-15
-
-# Better Talos
-The goal of Better Talos is to help inform Stuy students inform themselves on their classes (e.g. course rigor, course requirements, teacher evaluation, etc). Users can interact with the site by logging in with accounts that they can register. If users are not logged in, they still have access to all the data about each course and can read posts on the public forum. If users are logged in, they can input their own data to be given recommended classes, gpa predictor upon new schedules, access to posting on the forum, etc.
-
-**Components**
-1. `login.html`
-	* allows users to log into their accounts
-	* visible link to register page
-	* throws error if:
-		* account doesn’t exist
-		* incorrect password
-2. `register.html`
-	* allows users to create an account
-	* throws error if:
-		* username already exists in db
-		* password response doesn’t match with confirm password response
-3. `auth.py`
-	* handles login/register logic
-
-
-
-
-
-
-
-
-
-
-
-
-
 	# System Blueprint (_a.k.a._ "Design Doc")
 
 	## TNPG: koalas
@@ -160,8 +122,12 @@ preferences.
 
 # Database Design
 
-{Insert your table/document organizational structure here}
-
+| Table Name | Fields | Description |
+|---|---|---|
+| **Users** | `id` (INTEGER, PK), `username` (TEXT), `password`(TEXT), `grad_year` (INTEGER)| Stores basic user account and auth info |
+| **Courses** | `id` (PK, INTEGER), `course_code` (TEXT), `name` (TEXT),`subject` (TEXT)| All the courses. |
+| **Reviews** | `id` (PK, INTEGER), `course_code` (FK, INTEGER), `user_id` (FK), `difficulty`, `workload_hours`, `tags`, `content` | Crowdsourced data for the forum and predictor algorithms |
+| **Schedules** | `id` (PK, INTEGER), `user_id` (FK, INTEGER), `course_id` (FK, INTEGER), `semester_num` (INTEGER), `year`(INTEGER) | Stores a user's planned 4 year schedule |
 
 
 
