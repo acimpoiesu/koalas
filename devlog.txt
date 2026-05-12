@@ -37,3 +37,9 @@ alexandruC -- 2026-05-11 4:24
 
 alexandruC -- 2026-05-11 5:02
 - finished design doc
+
+shafinK -- 2026-05-12 00:06
+- initial DD review 
+- added in goal to implement moderation via admin account 
+- added in 'prereqs' field to courses 
+- clarified our project is more 'proof of concept'
