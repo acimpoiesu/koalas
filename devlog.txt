@@ -5,7 +5,7 @@ alexandruC -- 2026-05-01 10:36
   Has any team member provisioned SSL certificates to facilitate httpS traffic? YES
 
 shafinK -- 2026-05-05 10:38
- - added design.md 
+ - added design.md
  - added tnpg + roster + project name + description to design
 
 shafinK -- 2026-05-05 10:47
@@ -39,7 +39,11 @@ alexandruC -- 2026-05-11 5:02
 - finished design doc
 
 shafinK -- 2026-05-12 00:06
-- initial DD review 
-- added in goal to implement moderation via admin account 
-- added in 'prereqs' field to courses 
+- initial DD review
+- added in goal to implement moderation via admin account
+- added in 'prereqs' field to courses
 - clarified our project is more 'proof of concept'
+
+alexandruC -- 2026-05-12 10:45
+- Added hardcoded users table for now
+- made function that can be expanded into a real build_db
