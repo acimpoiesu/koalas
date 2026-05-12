@@ -50,3 +50,8 @@ alexandruC -- 2026-05-12 10:45
 
 mustafaA -- 2026-05-12 11:00
 - Add db helper functions, initial files in place
+
+shafinK -- 2026-05-12 10:59
+- added templates for home, header, login, register
+- added auth
+- edited build_db to run without csv
