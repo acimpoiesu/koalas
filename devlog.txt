@@ -47,3 +47,6 @@ shafinK -- 2026-05-12 00:06
 alexandruC -- 2026-05-12 10:45
 - Added hardcoded users table for now
 - made function that can be expanded into a real build_db
+
+mustafaA -- 2026-05-12 11:00
+- Add db helper functions, initial files in place
