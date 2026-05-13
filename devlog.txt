@@ -55,3 +55,32 @@ shafinK -- 2026-05-12 10:59
 - added templates for home, header, login, register
 - added auth
 - edited build_db to run without csv
+
+
+alexandruC -- 2026-05-13 7:15
+Python Style
+ Which aspects of the style guide were most applicable to your codebase?
+    - For our database initialization script, the most applicable aspects of PEP 8 were the naming conventions for global variables and the formatting of multiline strings.
+      For example adhering to ALL_CAPS for module constants makes them easily distinguishable from the dynamic, lowercase variables. Also using proper indentation for the triple quote       strings makes them much more readable at a glance.
+Which aspects of the style guide were most useful/appreciated by your Devos?
+    - We appreciated the emphasis on whitespace and skipping lines. By skipping lines in your code, a logical flow is established for the different parts (one can see all the imports
+      quickly at a glance and see where they end)
+Codebase reference:
+    - line 3 build_db.py -->  DB_FILE is a module level constant so it is capitalized
+    - line 8-15 --> indented multiline strings for the database to make it more clear
+
+alexandruC -- 2026-05-13 7:38
+Javascript Style
+Which aspects of the style guide were most applicable to your codebase?
+  -Since we are using it primarily for data viz, variable declarations & equality operators are the most important part. Eliminating var for let and const prevents hoisting errors
+    and is necessary to not mess up the global scope. Also using === and !== is also necessary when parsing dataset elements to the DOM.
+Which aspects of the style guide were most useful/appreciated by your Devos?
+  - The suggestion to use prettier was much appreciated. I already use prettier but because of this guide our group agreed to use prettier across the board to get more uniform, clearn
+    JS code. Especially important for JS since it's way too expressive so bad code quality makes it near impossible to maintain.
+Codebase reference:
+    we haven't started the JS for this project yet so i'll just use a reference from the last project
+    Line 36 spike_map.js -->  if (metric === "headcount") {return numFormat(val);} --> use of strict equality to make sure that the numerical data is properly formatted.
+    Line 148 spike_map.js --> const spikePath = `M${changeX - spikeW/2},${changeY} L${changeX},${changeY - height} L${changeX + spikeW/2},${changeY} Z`;
+    used template literals to make sure that the SVG path is able to be followed. 
+    without template literals it would look something like this which is not very readable:
+    const spikePath = "M" + (changeX - spikeW/2) + "," + changeY + " L" + changeX + "," + (changeY - height) + " L" + (changeX + spikeW/2) + "," + changeY + " Z";
