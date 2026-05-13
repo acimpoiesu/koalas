@@ -20,6 +20,14 @@ def disp_homepage():
     session['username'] = 's'
     return render_template('home.html')
 
+@app.route("/forum")
+def disp_forum():
+    return render_template("forum.html")
+
+@app.route("/review")
+def disp_review():
+    return render_template("review.html")
+
 if __name__ == "__main__":
     app.debug = False
     app.run()

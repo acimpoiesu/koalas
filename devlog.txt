@@ -81,6 +81,10 @@ Codebase reference:
     we haven't started the JS for this project yet so i'll just use a reference from the last project
     Line 36 spike_map.js -->  if (metric === "headcount") {return numFormat(val);} --> use of strict equality to make sure that the numerical data is properly formatted.
     Line 148 spike_map.js --> const spikePath = `M${changeX - spikeW/2},${changeY} L${changeX},${changeY - height} L${changeX + spikeW/2},${changeY} Z`;
-    used template literals to make sure that the SVG path is able to be followed. 
+    used template literals to make sure that the SVG path is able to be followed.
     without template literals it would look something like this which is not very readable:
     const spikePath = "M" + (changeX - spikeW/2) + "," + changeY + " L" + changeX + "," + (changeY - height) + " L" + (changeX + spikeW/2) + "," + changeY + " Z";
+
+shafinK -- 2026-05-13 10:46
+- added more placeholder htmls + their routes
+- changed readme to have description and roster 
