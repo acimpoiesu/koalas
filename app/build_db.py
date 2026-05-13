@@ -56,20 +56,62 @@ p05
 #     create_database(users)
 
 import sqlite3
+from db import general_query, insert_query, select_query
+
 
 DB_FILE = "koalas.db"
 
 db = sqlite3.connect(DB_FILE)
-cursor = db.cursor()
 
-cursor.executescript(
-    """
-    CREATE TABLE IF NOT EXISTS users (
-        username TEXT PRIMARY KEY,
-        password TEXT
-    );
-    """
-)
+def create_tables():
+    general_query("DROP TABLE IF EXISTS Users;")
+    general_query("DROP TABLE IF EXISTS Courses;")
+    general_query("DROP TABLE IF EXISTS Reviews;")
+    general_query("DROP TABLE IF EXISTS Schedules;")
+
+    general_query("""
+        CREATE TABLE IF NOT EXISTS Users (
+            id       INTEGER PRIMARY KEY,
+            username     TEXT,
+            password     TEXT,
+            grad_year    INTEGER
+        );
+    """)
+
+    general_query("""
+        CREATE TABLE IF NOT EXISTS Courses (
+            course_id          INTEGER PRIMARY KEY,
+            course_code        TEXT,
+            course_name        TEXT,
+            course_subject     TEXT,
+            prereqs            TEXT
+        );
+    """)
+
+    general_query("""
+        CREATE TABLE IF NOT EXISTS Reviews (
+            id             INTEGER PRIMARY KEY,
+            FOREIGN KEY (course_code) REFERENCES Courses(course_code),
+            name           TEXT,
+            subject        TEXT,
+            prereqs        TEXT,
+            workload_hours INTEGER,
+            tags           TEXT,
+            content        TEXT
+        );
+    """)
+
+    general_query("""
+        CREATE TABLE IF NOT EXISTS Schedules (
+            id               INTEGER PRIMARY KEY,
+            FOREIGN KEY (user_id) REFERENCES Users(id),
+            FOREIGN KEY (course_id) REFERENCES Courses(course_id),
+            semester_number  INTEGER,
+            school_year      INTEGER
+        );
+    """)    
+
+    
 
 db.commit()
 db.close()

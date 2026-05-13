@@ -91,3 +91,9 @@ shafinK -- 2026-05-13 10:46
 
 shafinK -- 2026-05-13 10:56
 - added placeholders for review form 
+
+mustafaA -- 2026-05-13 10:57
+- added tables into build_db.py
+- imported + called helper functions from db.py
+- TODO: make db more suited to the website's needs, populate db with sample data
+- TODO: figure out a way to get data on courses
