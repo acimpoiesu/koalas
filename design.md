@@ -221,12 +221,13 @@ As a user, I want to filter course reviews by tags so that I can select classes 
 
 
 ## Internal Deadlines:
-- May 25: MVP: All core routing + db functionality + primary UI
-- June 2: Stretch features deadline.
-- June 10: Full bug squashing
-- June 15: Target Ship
-
-
+- May 18: db fully built with course data & functioning routing
+- May 20: functioning prereq site
+- May 22: d3 graph created with the prereq database
+- May 25: drag & drop schedule builder js made
+- May 27: backend fully complete
+- May 29: middleware fully completed with full algorithms & page holding student data like classes taken made
+- June 1: Finishing touches, bug fixing, whatever crunch is left
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
 

@@ -90,10 +90,14 @@ shafinK -- 2026-05-13 10:46
 - changed readme to have description and roster
 
 shafinK -- 2026-05-13 10:56
-- added placeholders for review form 
+- added placeholders for review form
 
 mustafaA -- 2026-05-13 10:57
 - added tables into build_db.py
 - imported + called helper functions from db.py
 - TODO: make db more suited to the website's needs, populate db with sample data
 - TODO: figure out a way to get data on courses
+
+alexandruC -- 2026-05-14 10:43
+- added updated internal deadlines for project
+- added more granularity to internal deadlines --> deadlines didn't change much except pushed up backend dates to make sure we have it going early.
