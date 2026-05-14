@@ -105,3 +105,7 @@ alexandruC -- 2026-05-14 10:43
 shafinK -- 2026-05-14 10:54
 - finished review form + middleware to put it in db
 - added difficulty parameter to Review table 
+
+mustafaA -- 2026-05-14 10:58
+- Add preliminary table population
+- TODO: link html forms and db population, figure out a way to pull course data
