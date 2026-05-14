@@ -101,3 +101,7 @@ mustafaA -- 2026-05-13 10:57
 alexandruC -- 2026-05-14 10:43
 - added updated internal deadlines for project
 - added more granularity to internal deadlines --> deadlines didn't change much except pushed up backend dates to make sure we have it going early.
+
+shafinK -- 2026-05-14 10:54
+- finished review form + middleware to put it in db
+- added difficulty parameter to Review table 

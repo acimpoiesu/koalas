@@ -95,6 +95,7 @@ def create_tables():
             name           TEXT,
             subject        TEXT,
             prereqs        TEXT,
+            difficulty     INTEGER,
             workload_hours INTEGER,
             tags           TEXT,
             content        TEXT
@@ -109,9 +110,9 @@ def create_tables():
             semester_number  INTEGER,
             school_year      INTEGER
         );
-    """)    
+    """)
 
-    
+
 
 db.commit()
 db.close()
