@@ -95,6 +95,7 @@ def create_tables():
             name           TEXT,
             subject        TEXT,
             prereqs        TEXT,
+            difficulty     INTEGER,
             workload_hours INTEGER,
             tags           TEXT,
             content        TEXT
@@ -110,6 +111,7 @@ def create_tables():
             school_year      INTEGER
         );
     """)
+
     
 def populate_users(id, username, password, grad_year):
     insert_query('Users',
@@ -131,8 +133,6 @@ def populate_courses(course_id, course_code, course_name, course_subject, prereq
 def populate_reviews(id )
     
 
-    
-def populate_
     
 
 db.commit()

@@ -17,7 +17,7 @@ Review a Class
   <div class="w-full max-w-lg">
     <form
       method="POST"
-      action="{{ url_for('auth.login_post') }}"
+      action="{{ url_for('disp_review') }}"
       class="bg-white shadow-md border border-rose-500 rounded px-8 pt-6 pb-8 mb-4"
     >
       <div class="mb-4">
@@ -34,17 +34,47 @@ Review a Class
         />
       </div>
       <div class="mb-4">
-        <label class="text-gray-700 text-sm font-bold mb-2" for="content"
-          >How do you feel about this course?</label
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="difficulty"
+          >How hard is this class?</label
         >
         <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3"
-          id="content"
-          name="content"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+          id="difficulty"
+          name="difficulty"
+          type="number"
+          min=1
+          max=10
+          required
+          placeholder="Please enter a number 1-10"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="hours"
+          >How many hours per week do you spend working/studying for this class at home?</label
+        >
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700"
+          id="hours"
+          name="hours"
+          type="number"
+          min=0
+          max=168
+          required
+          placeholder="Please enter a number 0-168"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="text-gray-700 text-sm font-bold mb-2" for="desc"
+          >How do you feel about this course?</label
+        >
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 resize-y"
+          id="desc"
+          name="desc"
           type="text"
           required
           placeholder="This course is..."
-        />
+        ></textarea>
       </div>
       <div class="flex items-center justify-between">
         <button
