@@ -71,7 +71,7 @@ def create_tables():
 
     general_query("""
         CREATE TABLE IF NOT EXISTS Users (
-            id       INTEGER PRIMARY KEY,
+            id       INTEGER PRIMARY KEY AUTO INCREMENT,
             username     TEXT,
             password     TEXT,
             grad_year    INTEGER
@@ -109,8 +109,30 @@ def create_tables():
             semester_number  INTEGER,
             school_year      INTEGER
         );
-    """)    
+    """)
+    
+def populate_users(id, username, password, grad_year):
+    insert_query('Users',
+        "id":          null,
+        "username":    username,
+        "password":    password,
+        "grad_year":   grad_year
+    )
 
+def populate_courses(course_id, course_code, course_name, course_subject, prereqs):
+    insert_query('Courses',
+        'course_id':    course_id,
+        'course_code':  course_code,
+        'course_name':  course_name,
+        'course_subject':    course_subject,
+        'prereqs':   ", ".join(prereqs) 
+    )
+    
+def populate_reviews(id )
+    
+
+    
+def populate_
     
 
 db.commit()
