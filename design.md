@@ -7,7 +7,7 @@
 
 ## project: Better Talos
 
-## Target ship date: {2026-06-01}
+## Target ship date: 2026-06-01
 
 
 
@@ -239,9 +239,9 @@ Project is considered complete when all of the following are true:
 
 
 # Open Questions
-
+None at this time
 
 
 # Appendix
 Workload Algorithm:
-- It will probably be something simple like (Sum of predicted course hours) * User Speed User speed will be calculated by performance above or below average on assignments. Self-reported if no data.
+- It will probably be something simple like (Sum of predicted course hours) * User Speed; User speed will be calculated by performance above or below average on assignments. Self-reported if no data.
