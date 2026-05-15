@@ -109,3 +109,6 @@ shafinK -- 2026-05-14 10:54
 mustafaA -- 2026-05-14 10:58
 - Add preliminary table population
 - TODO: link html forms and db population, figure out a way to pull course data
+
+alexandruC -- 2026-05-15 7:10
+- added requirements.txt
