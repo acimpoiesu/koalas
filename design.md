@@ -231,15 +231,14 @@ As a user, I want to filter course reviews by tags so that I can select classes 
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
 
-Project is considered complete when all of the following are true:
-1. Meet all MVP requirements
+Project is considered complete when all of the following are true:  
+1. Meet all MVP requirements  
 2. Happy and ready to graduate >w<
 
 
 
 
 # Open Questions
-- How are we going to get data for this?
 
 
 
