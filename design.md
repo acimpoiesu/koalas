@@ -140,7 +140,7 @@ Each member must own meaningful deliverables.
 
 
 
-![Component Map](component.png)
+![Component Map](img/component.png)
 
 
 
@@ -148,7 +148,7 @@ Each member must own meaningful deliverables.
 
 
 
-![Site Map](site.png)
+![Site Map](img/site.png)
 
 
 
