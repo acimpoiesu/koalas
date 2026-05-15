@@ -116,3 +116,7 @@ alexandruC -- 2026-05-15 7:10
 alexandruC -- 2026-05-15 10:38
 - cleaned up format of design doc
 - added install guide to readme
+
+mustafaA -- 2026-05-15 10:47
+- fixed table generation
+

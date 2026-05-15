@@ -59,10 +59,6 @@ import sqlite3
 from db import general_query, insert_query, select_query
 
 
-DB_FILE = "koalas.db"
-
-db = sqlite3.connect(DB_FILE)
-
 def create_tables():
     general_query("DROP TABLE IF EXISTS Users;")
     general_query("DROP TABLE IF EXISTS Courses;")
@@ -71,7 +67,7 @@ def create_tables():
 
     general_query("""
         CREATE TABLE IF NOT EXISTS Users (
-            id       INTEGER PRIMARY KEY AUTO INCREMENT,
+            id       INTEGER PRIMARY KEY AUTOINCREMENT,
             username     TEXT,
             password     TEXT,
             grad_year    INTEGER
@@ -88,52 +84,51 @@ def create_tables():
         );
     """)
 
-    general_query("""
+    general_query('''
         CREATE TABLE IF NOT EXISTS Reviews (
             id             INTEGER PRIMARY KEY,
-            FOREIGN KEY (course_code) REFERENCES Courses(course_code),
+            course_code    TEXT,
             name           TEXT,
             subject        TEXT,
             prereqs        TEXT,
             difficulty     INTEGER,
             workload_hours INTEGER,
             tags           TEXT,
-            content        TEXT
+            content        TEXT,
+            comment_for    INTEGER
         );
-    """)
+    ''')
 
-    general_query("""
+    general_query('''
         CREATE TABLE IF NOT EXISTS Schedules (
             id               INTEGER PRIMARY KEY,
+            user_id          TEXT,
+            course_id        TEXT,
             FOREIGN KEY (user_id) REFERENCES Users(id),
-            FOREIGN KEY (course_id) REFERENCES Courses(course_id),
-            semester_number  INTEGER,
-            school_year      INTEGER
+            FOREIGN KEY (course_id) REFERENCES Courses(course_id)
         );
-    """)
+    ''')
 
     
-def populate_users(id, username, password, grad_year):
-    insert_query('Users',
-        "id":          null,
-        "username":    username,
-        "password":    password,
-        "grad_year":   grad_year
-    )
-
-def populate_courses(course_id, course_code, course_name, course_subject, prereqs):
-    insert_query('Courses',
-        'course_id':    course_id,
-        'course_code':  course_code,
-        'course_name':  course_name,
-        'course_subject':    course_subject,
-        'prereqs':   ", ".join(prereqs) 
-    )
+# def populate_users(id, username, password, grad_year):
+#     insert_query('Users',
+#         "id":          null,
+#         "username":    username,
+#         "password":    password,
+#         "grad_year":   grad_year
+#     )
+# 
+# def populate_courses(course_id, course_code, course_name, course_subject, prereqs):
+#     insert_query('Courses',
+#         'course_id':    course_id,
+#         'course_code':  course_code,
+#         'course_name':  course_name,
+#         'course_subject':    course_subject,
+#         'prereqs':   ", ".join(prereqs) 
+#     )
     
-def populate_reviews(id )
-    
-
+# def populate_reviews(id )
     
 
-db.commit()
-db.close()
+    
+create_tables()
