@@ -112,3 +112,6 @@ mustafaA -- 2026-05-14 10:58
 
 alexandruC -- 2026-05-15 7:10
 - added requirements.txt
+
+mustafaA -- 2026-05-15 10:47
+- fixed table generation
