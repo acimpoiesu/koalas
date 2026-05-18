@@ -27,6 +27,7 @@ def disp_forum():
 @app.route("/review", methods=["GET", "POST"])
 def disp_review():
     course = request.form.get("course", "")
+    subject = request.form.get("subject", "")
     difficulty = request.form.get("difficulty", 1)
     hours = request.form.get("hours", 0)
     desc = request.form.get("desc", "").strip()
@@ -37,8 +38,8 @@ def disp_review():
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
 
-    c.execute("INSERT INTO Reviews (course_code, name, difficulty, workload_hours, content) VALUES(?, ?, ?, ?, ?)",
-                                    (course, session['username'], difficulty, hours, desc,))
+    c.execute("INSERT INTO Reviews (course_code, name, subject, difficulty, workload_hours, content) VALUES(?, ?, ?, ?, ?, ?)",
+                                    (course, session['username'], subject, difficulty, hours, desc,))
     db.commit()
     db.close()
     return render_template("review.html")
