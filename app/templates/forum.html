@@ -13,4 +13,50 @@ Forum
 
 {% block content %}
 
+<br><br><br><br>
+
+<div class="max-w-3xl mx-auto py-10 px-4">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-2xl font-bold text-gray-800">Course Reviews</h1>
+    <a
+      href="{{ url_for('disp_review') }}"
+      class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded transition duration-200 hover:scale-105"
+    >
+      Write a Review
+    </a>
+  </div>
+
+  {% if posts %}
+    {% for post in posts %}
+    <a href="#" class="block bg-white border border-gray-200 rounded-lg shadow-sm mb-4 hover:border-rose-300 hover:shadow-md transition">
+      <div class="px-6 py-5">
+        <span class="text-xs">{{ post.name or "Anonymous" }}</span>
+        <div class="flex items-center gap-2 mt-0.5 mb-2">
+          <span class="text-lg font-bold text-gray-900">{{ post.course_code or "Unknown Course" }}</span>
+          {% if post.subject %}
+            <span class="text-xs font-semibold bg-rose-100 text-rose-600 px-2 py-0.5 rounded-full">{{ post.subject }}</span>
+          {% endif %}
+        </div>
+        {% if post.difficulty or post.workload_hours %}
+        <div class="flex gap-4 mb-3 text-sm text-gray-500">
+          {% if post.difficulty %}
+            <span>Difficulty: <strong>{{ post.difficulty }}/10</strong></span>
+          {% endif %}
+          {% if post.workload_hours %}
+            <span>{{ post.workload_hours }} hrs/week</span>
+          {% endif %}
+        </div>
+        {% endif %}
+        <p class="text-gray-700 text-sm line-clamp-3">{{ post.content or "" }}</p>
+      </div>
+    </a>
+    {% endfor %}
+
+  {% else %}
+    <div class="text-center py-20 text-gray-400">
+      <p class="text-lg font-medium">No reviews yet.</p>
+    </div>
+  {% endif %}
+</div>
+
 {% endblock %}

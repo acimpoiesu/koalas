@@ -126,5 +126,10 @@ alexandruC -- 2026-05-17 21:49
 alexandruC -- 2026-05-17 22:02
 - added routing for course api
 
-shafinK -- 2025-05-18 00:27
+shafinK -- 2026-05-18 00:27
 - added subjects to review
+
+shafinK -- 2026-05-18 00:58
+- fixed db population issue in __init__
+- added flash message for posting review
+- added reviews visualization to forum page
