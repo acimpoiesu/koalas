@@ -7,7 +7,7 @@
 
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
 from auth import bp as auth_bp
-import sqlite3, os, build_db, db
+import sqlite3, os, json, build_db, db
 
 app = Flask(__name__)
 app.register_blueprint(auth_bp)
@@ -62,6 +62,21 @@ def disp_courses():
     courses = [dict(zip(cols, row)) for row in c.fetchall()]
     db.close()
     return render_template("courses.html", courses=courses)
+
+@app.route("/courses/<int:course_id>")
+def disp_course(course_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT * FROM Courses WHERE course_id = ?", (course_id,))
+    cols = [d[0] for d in c.description]
+    row = c.fetchone()
+    db.close()
+    if not row:
+        flash("Course not found", "error")
+        return redirect(url_for("disp_courses"))
+    course = dict(zip(cols, row))
+    prereqs = json.loads(course['prereqs']) if course.get('prereqs') else []
+    return render_template("course.html", course=course, prereqs=prereqs)
     
 
 @app.route("/api/courses", methods=["GET"])

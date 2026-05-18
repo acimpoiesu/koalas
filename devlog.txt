@@ -138,3 +138,6 @@ shafinK -- 2026-05-18 01:15
 - added courses.html and course.html
 - edited header to include courses.html link
 - courses.html just lists all the courses in Courses table (name + id) under its subject
+
+shafinK -- 2026-05-18 1:35 
+- populated course.html to show prereqs for each course 
