@@ -5,7 +5,7 @@
 # 2026-06-01
 
 
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
 from auth import bp as auth_bp
 import sqlite3, os, build_db, db
 
@@ -42,6 +42,14 @@ def disp_review():
     db.commit()
     db.close()
     return render_template("review.html")
+
+@app.route("/api/courses", methods=["GET"])
+def get_courses():
+    try:
+        courses = db.select_query("SELECT * FROM Courses")
+        return jsonify(courses)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.debug = False

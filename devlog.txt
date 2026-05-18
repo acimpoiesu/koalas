@@ -122,3 +122,6 @@ mustafaA -- 2026-05-15 10:47
 
 alexandruC -- 2026-05-17 21:49
 - added some prereq data for now, fixed bug with db.py column names
+
+alexandruC -- 2026-05-17 22:02
+- added routing for course api
