@@ -52,6 +52,16 @@ def disp_review():
         db.close()
         flash('Review posted!', 'success')
     return render_template("review.html")
+
+@app.route("/courses")
+def disp_courses():
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT * FROM Courses ORDER BY course_subject, course_name")
+    cols = [d[0] for d in c.description]
+    courses = [dict(zip(cols, row)) for row in c.fetchall()]
+    db.close()
+    return render_template("courses.html", courses=courses)
     
 
 @app.route("/api/courses", methods=["GET"])
