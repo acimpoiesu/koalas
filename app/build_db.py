@@ -62,7 +62,7 @@ def create_tables():
         );
     ''')
 
-    
+
 # def populate_users(id, username, password, grad_year):
 #     insert_query('Users',
 #         "id":          null,
@@ -70,18 +70,18 @@ def create_tables():
 #         "password":    password,
 #         "grad_year":   grad_year
 #     )
-# 
+#
 # def populate_courses(course_id, course_code, course_name, course_subject, prereqs):
 #     insert_query('Courses',
 #         'course_id':    course_id,
 #         'course_code':  course_code,
 #         'course_name':  course_name,
 #         'course_subject':    course_subject,
-#         'prereqs':   ", ".join(prereqs) 
+#         'prereqs':   ", ".join(prereqs)
 #     )
-    
+
 # def populate_reviews(id )
-    
+
 def populate_courses(course_code, course_name, course_subject, prereqs):
     insert_query('Courses', {
         'course_code': course_code,
@@ -137,10 +137,10 @@ def populate_database():
     ]
 
     for course in course_catalog:
-        populate_courses( 
-            course_code=course['code'], 
-            course_name=course['name'], 
-            course_subject=course['subj'], 
+        populate_courses(
+            course_code=course['code'],
+            course_name=course['name'],
+            course_subject=course['subj'],
             prereqs=json.dumps(course['reqs'])
         )
 
