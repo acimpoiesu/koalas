@@ -5,59 +5,12 @@ SoftDev pd4
 p05
 06/01/26
 '''
-#
-# import sqlite3, csv, os, sys
-#
-# CSV_FILE_PATH = None
-# DB_FILE_PATH = 'koalas.db'
-#
-# def create_database(table_name):
-#     db = sqlite3.connect(DB_FILE_PATH)
-#     cursor = db.cursor()
-#
-#         table_query = f'''
-#         CREATE TABLE IF NOT EXISTS {table_name} (
-#             id INTEGER,
-#             user TEXT,
-#             pass TEXT,
-#             grad_year INTEGER
-#         )
-#         '''
-#         cursor.execute(table_query)
-#
-#         if not os.path.exists(CSV_FILE_PATH):
-#             print(f"could not find {CSV_FILE_PATH}")
-#             return
-#
-#         print(f"currently reading from {CSV_FILE_PATH}")
-#
-#         with open (CSV_FILE_PATH, mode = "r", encoding="utf-8") as csv_file:
-#             csv_file = csv.reader(csv_file)
-#             next(csv_file, None)
-#             insert_query = f'''
-#             INSERT INTO {table_name} (
-#             id, user, pass, grad_year
-#             ) VALUES (?, ?, ?, ?)
-#             '''
-#         row_count = 0
-#         for row in csv_file:
-#             try:
-#                 cursor.execute(insert_query, row)
-#             except:
-#                 print(f"failed on row {row_count}")
-#                 sys.exit(1)
-#             row_count += 1
-#     db.commit()
-#     db.close()
-#
-#     print(f"finished reading")
-#
-# if __name__ == "__main__":
-#     create_database(users)
+
 
 import sqlite3
 from db import general_query, insert_query, select_query
 import json
+import csv
 
 def create_tables():
     general_query("DROP TABLE IF EXISTS Users;")
@@ -139,6 +92,7 @@ def populate_courses(course_code, course_name, course_subject, prereqs):
 
 def populate_database():
     create_tables()
+    populate_courses_csv('sheet.csv')
 
     # temp data
     course_catalog = [
@@ -189,5 +143,24 @@ def populate_database():
             course_subject=course['subj'], 
             prereqs=json.dumps(course['reqs'])
         )
+
+def populate_courses_csv(path):
+    with open(path, 'r') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            code = row['COURSE'].strip()
+            name = row['TITLE'].strip().title()
+            subject = row['DEPARTMENT'].strip()
+            reqs = row['COURSE REQ (CATALOG)'].strip()
+
+            prereqs_list = [reqs] if reqs else []
+
+            populate_courses(
+                course_code = code,
+                course_name = name,
+                course_subject = subject,
+                prereqs = json.dumps(prereqs_list)
+            )
+
 if __name__ == "__main__":
     populate_database()
