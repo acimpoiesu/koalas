@@ -144,3 +144,8 @@ shafinK -- 2026-05-18 1:35
 
 shafinK -- 2026-05-18 01:53
 - messed around with site colors
+
+mustafaA -- 2026-05-18 10:33
+- Added sheet.csv --> all course data + prereqs
+- Parsed csv and populated datatables in build_db.py --> displayed on frontend
+- Fixed bug with csv file routing
