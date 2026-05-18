@@ -92,7 +92,7 @@ def populate_courses(course_code, course_name, course_subject, prereqs):
 
 def populate_database():
     create_tables()
-    populate_courses_csv('sheet.csv')
+    populate_courses_csv('../sheet.csv')
 
     # temp data
     course_catalog = [
