@@ -120,3 +120,5 @@ alexandruC -- 2026-05-15 10:38
 mustafaA -- 2026-05-15 10:47
 - fixed table generation
 
+alexandruC -- 2026-05-17 21:49
+- added some prereq data for now, fixed bug with db.py column names
