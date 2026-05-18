@@ -141,3 +141,6 @@ shafinK -- 2026-05-18 01:15
 
 shafinK -- 2026-05-18 1:35 
 - populated course.html to show prereqs for each course 
+
+shafinK -- 2026-05-18 01:53
+- messed around with site colors

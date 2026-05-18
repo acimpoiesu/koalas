@@ -44,9 +44,9 @@ Courses
     {% for subject in subjects %}
       <h2 class="text-sm font-semibold uppercase tracking-wide text-gray-400 mb-2 mt-6">{{ subject }}</h2>
       {% for course in courses if course.course_subject == subject %}
-        <a href="{{ url_for('disp_course', course_id=course.course_id) }}" class="flex items-center justify-between px-4 py-3 bg-white border border-gray-200 rounded-lg mb-2 hover:border-rose-300 hover:shadow-sm transition">
+        <a href="{{ url_for('disp_course', course_id=course.course_id) }}" class="flex items-center justify-between px-4 py-3 bg-white border border-gray-200 rounded-lg mb-2 hover:border-teal-300 hover:shadow-sm transition">
           <div>
-            <span class="font-mono text-xs text-gray-400 mr-2">{{ course.course_code }}</span>
+            <span class="font-mono text-xs text-green-500 mr-2">{{ course.course_code }}</span>
             <span class="text-gray-800 font-medium">{{ course.course_name }}</span>
           </div>
         </a>
