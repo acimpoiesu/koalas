@@ -33,7 +33,8 @@ def create_tables():
             course_code        TEXT,
             course_name        TEXT,
             course_subject     TEXT,
-            prereqs            TEXT
+            prereqs            TEXT,
+            course_description TEXT
         );
     """)
 
@@ -62,25 +63,28 @@ def create_tables():
         );
     ''')
 
-def populate_courses(course_code, course_name, course_subject, prereqs):
+def populate_courses(course_code, course_name, course_subject, prereqs, course_description):
     insert_query('Courses', {
         'course_code': course_code,
         'course_name': course_name,
         'course_subject': course_subject,
-        'prereqs': prereqs
+        'prereqs': prereqs,
+        'course_description': course_description
     })
 
 def populate_database():
     create_tables()
     populate_courses_csv('../sheet.csv')
 
-    for course in course_catalog:
-        populate_courses(
-            course_code=course['code'],
-            course_name=course['name'],
-            course_subject=course['subj'],
-            prereqs=json.dumps(course['reqs'])
-        )
+#     for course in course_catalog:
+#         populate_courses(
+#             course_code=course['code'],
+#             course_name=course['name'],
+#             course_subject=course['subj'],
+#             prereqs=json.dumps(course['reqs']),
+#             course_description=(course['description'])
+#         
+#         )
 
 def populate_courses_csv(path):
     with open(path, 'r') as f:
@@ -90,6 +94,7 @@ def populate_courses_csv(path):
             name = row['TITLE'].strip().title()
             subject = row['DEPARTMENT'].strip()
             reqs = row['COURSE REQ (CATALOG)'].strip()
+            description = row['DESCRIPTION'].strip()
 
             prereqs_list = [reqs] if reqs else []
 
@@ -97,7 +102,9 @@ def populate_courses_csv(path):
                 course_code = code,
                 course_name = name,
                 course_subject = subject,
-                prereqs = json.dumps(prereqs_list)
+                prereqs = json.dumps(prereqs_list),
+                course_description = description
+                
             )
 
 if __name__ == "__main__":
