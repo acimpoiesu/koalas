@@ -152,3 +152,6 @@ mustafaA -- 2026-05-18 10:33
 
 mustafaA -- 2026-05-19 10:32
 - Add course_description to courses table inside database
+
+shafinK -- 2026-05-19
+- added course_description to class/<class_id> page
