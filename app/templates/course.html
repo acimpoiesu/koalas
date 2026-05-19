@@ -40,6 +40,19 @@
     {% else %}
     <p class="text-sm text-gray-400">No prerequisites.</p>
     {% endif %}
+    
+    <br>
+    
+    {% if course.course_description %}
+    <div>
+      <p class="text-sm font-semibold text-gray-600 mb-2">Course Description</p>
+      <ul class="space-y-1">
+          <li class="text-sm text-gray-700">{{ course.course_description }}</li>
+      </ul>
+    </div>
+    {% else %}
+    <p class="text-sm text-gray-400">No course description.</p>
+    {% endif %}
   </div>
 </div>
 

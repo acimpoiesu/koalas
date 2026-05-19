@@ -29,7 +29,7 @@ def disp_forum():
     posts = [dict(zip(cols, row)) for row in c.fetchall()]
     db.close()
     return render_template("forum.html", posts=posts)
- 
+
 
 @app.route("/review", methods=["GET", "POST"])
 def disp_review():
@@ -77,7 +77,7 @@ def disp_course(course_id):
     course = dict(zip(cols, row))
     prereqs = json.loads(course['prereqs']) if course.get('prereqs') else []
     return render_template("course.html", course=course, prereqs=prereqs)
-    
+
 
 @app.route("/api/courses", methods=["GET"])
 def get_courses():
