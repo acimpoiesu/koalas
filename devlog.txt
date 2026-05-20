@@ -104,7 +104,7 @@ alexandruC -- 2026-05-14 10:43
 
 shafinK -- 2026-05-14 10:54
 - finished review form + middleware to put it in db
-- added difficulty parameter to Review table 
+- added difficulty parameter to Review table
 
 mustafaA -- 2026-05-14 10:58
 - Add preliminary table population
@@ -139,8 +139,8 @@ shafinK -- 2026-05-18 01:15
 - edited header to include courses.html link
 - courses.html just lists all the courses in Courses table (name + id) under its subject
 
-shafinK -- 2026-05-18 1:35 
-- populated course.html to show prereqs for each course 
+shafinK -- 2026-05-18 1:35
+- populated course.html to show prereqs for each course
 
 shafinK -- 2026-05-18 01:53
 - messed around with site colors
@@ -149,3 +149,6 @@ mustafaA -- 2026-05-18 10:33
 - Added sheet.csv --> all course data + prereqs
 - Parsed csv and populated datatables in build_db.py --> displayed on frontend
 - Fixed bug with csv file routing
+
+alexandruC -- 2026-05-20 10:33
+- fixed last few formatting issues with design doc (fingers crossed)

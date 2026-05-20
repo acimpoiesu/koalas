@@ -66,10 +66,10 @@ The project would help students better map out their academic path over the cour
 
 
 ## Core Features (Required for Final Submission)
-Features that **must** be completed:
-1. Online message board for discussion
-2. Admin User with moderation abilities
-3. Information on each course and teacher
+Features that **must** be completed:  
+1. Online message board for discussion  
+2. Admin User with moderation abilities  
+3. Information on each course and teacher  
 4. Prerequisites for each course
 
 
@@ -243,5 +243,6 @@ None at this time
 
 
 # Appendix
-Workload Algorithm:
-- It will probably be something simple like (Sum of predicted course hours) * User Speed; User speed will be calculated by performance above or below average on assignments. Self-reported if no data.
+Workload Algorithm:  
+It will probably be something simple like (Sum of predicted course hours) * User Speed.
+User speed will be calculated by performance above or below average on assignments. Self-reported if no data.
