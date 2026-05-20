@@ -150,5 +150,11 @@ mustafaA -- 2026-05-18 10:33
 - Parsed csv and populated datatables in build_db.py --> displayed on frontend
 - Fixed bug with csv file routing
 
+mustafaA -- 2026-05-19 10:32
+- Add course_description to courses table inside database
+
+shafinK -- 2026-05-19
+- added course_description to class/<class_id> page
+
 alexandruC -- 2026-05-20 10:33
 - fixed last few formatting issues with design doc (fingers crossed)
