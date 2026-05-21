@@ -158,3 +158,6 @@ shafinK -- 2026-05-19
 
 alexandruC -- 2026-05-20 10:33
 - fixed last few formatting issues with design doc (fingers crossed)
+
+shafinK -- 2026-05-20 11:43
+- added condition for valid course code 

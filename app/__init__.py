@@ -46,11 +46,16 @@ def disp_review():
         db = sqlite3.connect(DB_FILE)
         c = db.cursor()
 
-        c.execute("INSERT INTO Reviews (course_code, name, subject, difficulty, workload_hours, content) VALUES(?, ?, ?, ?, ?, ?)",
-                                        (course, session['username'], subject, difficulty, hours, desc,))
-        db.commit()
-        db.close()
-        flash('Review posted!', 'success')
+        c.execute("SELECT 1 FROM Courses WHERE course_code = ?", (course,))
+        if not c.fetchone():
+            c.close()
+            flash('Please enter a valid course code.', 'error')
+        else: 
+            c.execute("INSERT INTO Reviews (course_code, name, subject, difficulty, workload_hours, content) VALUES(?, ?, ?, ?, ?, ?)",
+                                            (course, session['username'], subject, difficulty, hours, desc,))
+            db.commit()
+            db.close()
+            flash('Review posted!', 'success')
     return render_template("review.html")
 
 @app.route("/courses")
