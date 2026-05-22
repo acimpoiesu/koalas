@@ -13,6 +13,7 @@ app = Flask(__name__)
 app.register_blueprint(auth_bp)
 app.secret_key = "secretkey"
 DB_FILE = "koalas.db"
+SERVER_ERROR = 500
 
 
 @app.route("/")
@@ -90,7 +91,7 @@ def get_courses():
         courses = db.select_query("SELECT * FROM Courses")
         return jsonify(courses)
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), SERVER_ERROR
 
 @app.route("/prereqs")
 def disp_prereq_graph():
