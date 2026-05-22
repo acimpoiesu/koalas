@@ -50,7 +50,7 @@ def disp_review():
         if not c.fetchone():
             c.close()
             flash('Please enter a valid course code.', 'error')
-        else: 
+        else:
             c.execute("INSERT INTO Reviews (course_code, name, subject, difficulty, workload_hours, content) VALUES(?, ?, ?, ?, ?, ?)",
                                             (course, session['username'], subject, difficulty, hours, desc,))
             db.commit()

@@ -23,13 +23,15 @@ def register_post():
         return redirect(url_for('auth.register_get'))
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute("select * from users where username = ?", (username,))
+    c.execute("select * from users where username = ?",
+        (username,))
     user_exists = c.fetchone()
     if user_exists:
         flash('Username already taken', 'error')
         return redirect(url_for('auth.register_get'))
     hashword = generate_password_hash(password)
-    c.execute("insert into users (username, password) values (?, ?)", (username, hashword))
+    c.execute("insert into users (username, password) values (?, ?)",
+        (username, hashword))
     db.commit()
     db.close()
     session["username"] = username
