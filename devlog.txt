@@ -164,3 +164,7 @@ shafinK -- 2026-05-20 11:43
 
 alexandruC -- 2026-05-21 22:54
 - added prereq html page in prepartion for d3 graph
+
+alexandruC -- 2026-05-21 12:05
+- made prereq graph that displays prereqs, not connected well
+

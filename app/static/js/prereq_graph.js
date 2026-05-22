@@ -47,3 +47,32 @@ async function createPrereqTree() {
     var mainG = svg.append("g")
         .attr("id", "main-group")
         .attr("transform", "translate(" + (w/4) + ", 15)");
+        
+    mainG.append("g")
+        .attr("fill", "none")
+        .attr("stroke", "#555")
+        .attr("stroke-opacity", 0.4)
+      .selectAll("path")
+      .data(rootNode.links())
+      .enter().append("path")
+        .attr("d", d3.linkHorizontal().x(function(d) { return d.y; }).y(function(d) { return d.x; }));
+
+    var nodes = mainG.append("g")
+      .selectAll("g")
+      .data(rootNode.descendants())
+      .enter().append("g")
+        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+
+    nodes.append("circle")
+        .attr("r", 2.5)
+        .attr("fill", function(d) { return d.children ? "#555" : "#999"; });
+
+    nodes.append("text")
+        .attr("dy", "0.31em")
+        .attr("x", function(d) { return d.children ? -6 : 6; })
+        .attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
+        .text(function(d) { return d.data.name; })
+        .attr("fill", "#14b8a6");
+}
+
+createPrereqTree();
