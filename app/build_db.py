@@ -12,6 +12,8 @@ from db import general_query, insert_query, select_query
 import json
 import csv
 
+CSV_PATH = '../sheet.csv'
+
 def create_tables():
     general_query("DROP TABLE IF EXISTS Users;")
     general_query("DROP TABLE IF EXISTS Courses;")
@@ -74,7 +76,7 @@ def populate_courses(course_code, course_name, course_subject, prereqs, course_d
 
 def populate_database():
     create_tables()
-    populate_courses_csv('../sheet.csv')
+    populate_courses_csv(CSV_PATH)
 
 #     for course in course_catalog:
 #         populate_courses(
@@ -83,7 +85,7 @@ def populate_database():
 #             course_subject=course['subj'],
 #             prereqs=json.dumps(course['reqs']),
 #             course_description=(course['description'])
-#         
+#
 #         )
 
 def populate_courses_csv(path):
@@ -104,7 +106,7 @@ def populate_courses_csv(path):
                 course_subject = subject,
                 prereqs = json.dumps(prereqs_list),
                 course_description = description
-                
+
             )
 
 if __name__ == "__main__":

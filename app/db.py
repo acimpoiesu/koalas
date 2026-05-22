@@ -9,7 +9,11 @@ DB_FILE="./koalas.db"
 
 db = sqlite3.connect(DB_FILE, check_same_thread=False)
 
-#returns as list of dicts, where each item in the list is one row's entry, and each dict entry contains the selected data as the value for the column name as the key
+'''
+returns as list of dicts,
+each item in the list is one row's entry
+each dict entry contains the selected data as the value for the column name as the key
+'''
 def select_query(query_string, parameters=()):
     c = db.cursor()
     c.execute(query_string, parameters)
