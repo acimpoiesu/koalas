@@ -92,6 +92,10 @@ def get_courses():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route("/prereqs")
+def disp_prereq_graph():
+    return render_template('prereqs.html')
+
 if __name__ == "__main__":
     build_db.populate_database()
     app.debug = False
