@@ -168,3 +168,6 @@ alexandruC -- 2026-05-21 22:54
 alexandruC -- 2026-05-21 12:05
 - made prereq graph that displays prereqs, not connected well
 
+alexandruC -- 2026-06-02 10:32
+- just realized i didnt commit all my local work...
+- added script to give proper perms for db on machine of record
