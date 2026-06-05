@@ -9,6 +9,7 @@ p05
 
 import sqlite3
 from db import general_query, insert_query, select_query
+import re
 import json
 import csv
 
@@ -65,6 +66,36 @@ def create_tables():
         );
     ''')
 
+def parse_prereqs(req_string):
+    if not req_string:
+        return []
+    reqs = []
+    req_string = req_string.upper()
+    grades = []
+    if 'FRESHMEN' in req_string:
+        grades.append(9)
+    if 'SOPHOMORES' in req_string:
+        grades.append(10)
+    if 'JUNIORS' in req_string:
+        grades.append(11)
+    if 'SENIORS' in req_string:
+        grades.append(12)
+    if grades:
+        reqs.append({"type": "grade_level", "allowed_grades": grades})
+    passed_match = re.findall(r'PASSED\s+([A-Z0-9]+)', req_string)
+    if passed_match:
+        reqs.append({"type": "passed", "courses": passed_match})
+    avg_match = re.search(r'AVG\s*?[>=]\s*?(\d+)', req_string)
+    if avg_match:
+        reqs.append({"type": "subject_avg", "min_grade": int(avg_match.group(1))})
+    course_grade_match = re.search(r'(\d+)\+\s*IN\s*(.*)', req_string)
+    if course_grade_match:
+        reqs.append({"type": "course_grade", "min_grade": int(course_grade_match.group(1)), "course_name": course_grade_match.group(2).strip()})
+    if not reqs:
+        reqs.append({"type": "raw", "text": req_string.strip()})
+    return reqs
+
+
 def populate_courses(course_code, course_name, course_subject, prereqs, course_description):
     insert_query('Courses', {
         'course_code': course_code,
@@ -89,7 +120,7 @@ def populate_database():
 #         )
 
 def populate_courses_csv(path):
-    with open(path, 'r') as f:
+    with open(path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
             code = row['COURSE'].strip()
@@ -97,16 +128,13 @@ def populate_courses_csv(path):
             subject = row['DEPARTMENT'].strip()
             reqs = row['COURSE REQ (CATALOG)'].strip()
             description = row['DESCRIPTION'].strip()
-
-            prereqs_list = [reqs] if reqs else []
-
+            structured_prereqs = parse_prereqs(reqs)
             populate_courses(
                 course_code = code,
                 course_name = name,
                 course_subject = subject,
-                prereqs = json.dumps(prereqs_list),
+                prereqs = json.dumps(structured_prereqs),
                 course_description = description
-
             )
 
 if __name__ == "__main__":

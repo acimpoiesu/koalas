@@ -97,6 +97,16 @@ def get_courses():
 def disp_prereq_graph():
     return render_template('prereqs.html')
 
+@app.route("/planner")
+def disp_planner():
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT * FROM Courses ORDER BY course_subject, course_code")
+    cols = [d[0] for d in c.description]
+    courses = [dict(zip(cols, row)) for row in c.fetchall()]
+    db.close()
+    return render_template("planner.html", courses=courses)
+
 if __name__ == "__main__":
     build_db.populate_database()
     app.debug = False

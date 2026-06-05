@@ -171,3 +171,6 @@ alexandruC -- 2026-05-21 12:05
 alexandruC -- 2026-06-02 10:32
 - just realized i didnt commit all my local work...
 - added script to give proper perms for db on machine of record
+
+alexandruC -- 2026-06-05 8:48
+- push work that wasn't on github

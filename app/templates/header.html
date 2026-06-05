@@ -58,86 +58,46 @@
   </head>
   <body class="bg-white text-gray-900">
     <header>
-      <nav
-        id="site-nav"
-        class="site-nav bg-white fixed w-full top-0 start-0 border-b border-teal-500 z-50"
-      >
-        <div
-          class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-        >
-          <a
-            href="/"
-            class="flex items-center space-x-3 rtl:space-x-reverse group"
-          >
-            <img
-              src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F051%2F958%2F130%2Fnon_2x%2Fcute-koala-bear-clinging-to-a-tree-branch-isolated-on-transparent-background-highlighting-its-natural-habitat-and-adorable-features-png.png&f=1&nofb=1&ipt=45f2fd2fb09a81fd3eb8e57e6b7fc8b2b6fb5a62d0943cd63c326b362401577b"
+      <nav id="site-nav"
+        class="site-nav bg-white fixed w-full top-0 start-0 border-b border-teal-500 z-50">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <a href="/"
+            class="flex items-center space-x-3 rtl:space-x-reverse group">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F051%2F958%2F130%2Fnon_2x%2Fcute-koala-bear-clinging-to-a-tree-branch-isolated-on-transparent-background-highlighting-its-natural-habitat-and-adorable-features-png.png&f=1&nofb=1&ipt=45f2fd2fb09a81fd3eb8e57e6b7fc8b2b6fb5a62d0943cd63c326b362401577b"
               class="h-20 transition-transform duration-300 group-hover:scale-105"
-              alt="koala"
-            />
-            <span
-              class="font-display self-center text-2xl font-semibold whitespace-nowrap text-gray-900 group-hover:text-teal-500 transition-colors"
-              >koalas<span class="text-teal-500">.</span>me</span
-            >
+              alt="koala"/>
+            <span class="font-display self-center text-2xl font-semibold whitespace-nowrap text-gray-900 group-hover:text-teal-500 transition-colors">koalas<span class="text-teal-500">.</span>me</span>
           </a>
-
           <div id="navbar-default">
-            <ul
-              class="font-medium flex md:flex-row md:space-x-8 rtl:space-x-reverse items-center text-sm"
-            >
+<ul class="font-medium flex md:flex-row md:space-x-8 rtl:space-x-reverse items-center text-sm">
               <li>
-                <a
-                  href="https://github.com/acimpoiesu/koalas"
-                  class="text-gray-600 hover:text-teal-500 transition-colors"
-                  >Github</a
-                >
+                <a href="https://github.com/acimpoiesu/koalas" class="text-gray-600 hover:text-teal-500 transition-colors">Github</a>
               </li>
               {% if not session['username'] %}
               <li>
-                <a
-                  href="/auth/login"
-                  class="text-gray-600 hover:text-teal-500 transition-colors"
-                  >Log In</a
-                >
+                <a href="/auth/login" class="text-gray-600 hover:text-teal-500 transition-colors">Log In</a>
               </li>
               <li>
-                <a
-                  href="/auth/register"
-                  class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full transition-all hover:shadow-md hover:shadow-teal-200"
-                  >Register</a
-                >
+                <a href="/auth/register" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full transition-all hover:shadow-md hover:shadow-teal-200">Register</a>
               </li>
               {% else %}
-              <li>
-                <a
-                  href="/forum"
-                  class="text-gray-600 hover:text-teal-500 transition-colors"
-                  >Forum</a
-                >
+<li>
+                <a href="{{ url_for('disp_planner') }}" class="text-gray-600 hover:text-teal-500 transition-colors">Planner</a>
               </li>
               <li>
-                <a
-                  href="/review"
-                  class="text-gray-600 hover:text-teal-500 transition-colors"
-                  >Feedback</a
-                >
+                <a href="{{ url_for('disp_prereq_graph') }}" class="text-gray-600 hover:text-teal-500 transition-colors">Graph</a>
               </li>
               <li>
-                <a
-                  href="/courses"
-                  class="text-gray-600 hover:text-teal-500 transition-colors"
-                  >Courses</a
-                >
+                <a href="{{ url_for('disp_courses') }}" class="text-gray-600 hover:text-teal-500 transition-colors">Courses</a>
               </li>
               <li>
-                <a
-                  href="/auth/logout"
-                  class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full transition-all hover:shadow-md hover:shadow-teal-200"
-                  >Log Out</a
-                >
+                <a href="{{ url_for('disp_forum') }}" class="text-gray-600 hover:text-teal-500 transition-colors">Forum</a>
+              </li>
+              <li>
+                <a href="{{ url_for('auth.logout_get') }}" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-full transition-all hover:shadow-md hover:shadow-teal-200">Log Out</a>
               </li>
               {% endif %}
             </ul>
-          </div>
         </div>
       </nav>
     </header>
@@ -145,7 +105,8 @@
     <main class="content">{% block content %} {% endblock %}</main>
 
     <script>
-      (function () {
+      (
+        function () {
         var nav = document.getElementById("site-nav");
         if (!nav) return;
         var lastScroll = window.pageYOffset;
@@ -190,7 +151,9 @@
           },
           { passive: true }
         );
-      })();
+      }
+    )
+    ();
     </script>
 
     {% block script %} {% endblock %}
