@@ -180,3 +180,7 @@ shafinK -- 2026-06-15 00:25
 
 shafinK -- 2026-06-15 00:37
 - fixed prereq formatting on course page 
+
+shafinK -- 2026-06-15 01:00
+- added admin with ability to delete posts/comments
+- made it so you have to be logged in to access any page 

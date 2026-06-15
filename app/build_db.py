@@ -9,11 +9,15 @@ p05
 
 import sqlite3
 from db import general_query, insert_query, select_query
+from werkzeug.security import generate_password_hash
 import re
 import json
 import csv
 
 CSV_PATH = '../sheet.csv'
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "bananaramamustafashafinalexjalenknicksin5"
 
 def create_tables():
     general_query("DROP TABLE IF EXISTS Users;")
@@ -105,8 +109,16 @@ def populate_courses(course_code, course_name, course_subject, prereqs, course_d
         'course_description': course_description
     })
 
+def populate_admin():
+    insert_query('Users', {
+        'username': ADMIN_USERNAME,
+        'password': generate_password_hash(ADMIN_PASSWORD),
+        'grad_year': None
+    })
+
 def populate_database():
     create_tables()
+    populate_admin()
     populate_courses_csv(CSV_PATH)
 
 #     for course in course_catalog:

@@ -14,11 +14,26 @@ app.register_blueprint(auth_bp)
 app.secret_key = "secretkey"
 DB_FILE = "koalas.db"
 SERVER_ERROR = 500
+ADMIN_USERNAME = "admin"
+
+LOGIN_EXEMPT_ENDPOINTS = {
+    'auth.login_get',
+    'auth.login_post',
+    'auth.register_get',
+    'auth.register_post',
+    'static',
+}
+
+
+@app.before_request
+def require_login():
+    if 'username' not in session and request.endpoint not in LOGIN_EXEMPT_ENDPOINTS:
+        return redirect(url_for('auth.login_get'))
 
 
 @app.route("/")
 def disp_homepage():
-    session['username'] = 's'
+    # session['username'] = 's'
     return render_template('home.html')
 
 @app.route("/forum")
@@ -104,6 +119,41 @@ def disp_forum_detail(review_id):
 
     db.close()
     return render_template("forum_detail.html", post=post, comments=comments)
+
+
+def _delete_review_tree(c, review_id):
+    c.execute("SELECT id FROM Reviews WHERE comment_for = ?", (review_id,))
+    child_ids = [row[0] for row in c.fetchall()]
+    for child_id in child_ids:
+        _delete_review_tree(c, child_id)
+    c.execute("DELETE FROM Reviews WHERE id = ?", (review_id,))
+
+
+@app.route("/review/<int:review_id>/delete", methods=["POST"])
+def delete_comment(review_id):
+    if session.get('username') != ADMIN_USERNAME:
+        flash('You do not have permission to do that.', 'error')
+        return redirect(url_for('disp_forum'))
+
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    c.execute("SELECT comment_for FROM Reviews WHERE id = ?", (review_id,))
+    row = c.fetchone()
+    if not row:
+        db.close()
+        flash('Comment not found.', 'error')
+        return redirect(url_for('disp_forum'))
+
+    parent_id = row[0]
+    _delete_review_tree(c, review_id)
+    db.commit()
+    db.close()
+    flash('Comment deleted.', 'success')
+
+    if parent_id is not None:
+        return redirect(url_for('disp_forum_detail', review_id=parent_id))
+    return redirect(url_for('disp_forum'))
 
 
 @app.route("/courses")
