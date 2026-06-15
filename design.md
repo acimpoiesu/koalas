@@ -5,9 +5,9 @@
 
 ## TNPG: koalas
 
-## project: Better Talos
+## project: BetterTalos
 
-## Target ship date: 2026-06-01
+## Target ship date: 2026-06-15
 
 
 
@@ -25,7 +25,7 @@
 | Alexandru Cimpoiesu|alexandruc4@nycstudents.net| Database organizer/parser|Grade prediction algorithm developer|
 | Shafin Kazi |shafink3@nycstudents.net| Javascript | (Secondary) frontend designer |
 | Mustafa Abdullah|mustafaa80@nycstudents.net | API Integration/JS | Middleware manager |
-| Jalen Chen|jalenc60@nycstudents.net | Frontend designer | Secondary database parser |
+| Jalen Chen|jalenc60@nycstudents.net | Frontend designer + JS | Secondary database parser |
 
 
 
@@ -35,7 +35,7 @@
 
 
 # Summary
-Better Talos is to help inform Stuy students inform themselves on their classes (e.g. course rigor, course requirements, teacher evaluation, etc) and engage in public forums to discuss all things Stuy.
+Better Talos is to help inform Stuy students inform themselves on their classes (e.g. course rigor, course requirements, teacher evaluation, etc) and help them plan out their potential schedules.
 
 
 
@@ -66,10 +66,10 @@ The project would help students better map out their academic path over the cour
 
 
 ## Core Features (Required for Final Submission)
-Features that **must** be completed:  
-1. Online message board for discussion  
-2. Admin User with moderation abilities  
-3. Information on each course and teacher  
+Features that **must** be completed:
+1. Course reviews forum
+2. Admin User with moderation abilities
+3. Information on each course
 4. Prerequisites for each course
 
 
@@ -227,12 +227,12 @@ As a user, I want to filter course reviews by tags so that I can select classes 
 - May 25: drag & drop schedule builder js made
 - May 27: backend fully complete
 - May 29: middleware fully completed with full algorithms & page holding student data like classes taken made
-- June 1: Finishing touches, bug fixing, whatever crunch is left
+- June 15: Finishing touches, bug fixing, whatever crunch is left
 
 # Completion Criteria (_a.k.a._ "Definition of 'Done'")
 
-Project is considered complete when all of the following are true:  
-1. Meet all MVP requirements  
+Project is considered complete when all of the following are true:
+1. Meet all MVP requirements
 2. Happy and ready to graduate >w<
 
 
@@ -243,6 +243,6 @@ None at this time
 
 
 # Appendix
-Workload Algorithm:  
+Workload Algorithm:
 It will probably be something simple like (Sum of predicted course hours) * User Speed.
 User speed will be calculated by performance above or below average on assignments. Self-reported if no data.
