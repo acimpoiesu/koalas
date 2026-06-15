@@ -188,7 +188,7 @@ shafinK -- 2026-06-15 01:00
 shafinK -- 2026-06-15 01:36
 - fixed prereq problem in planner
 
-jalenC -- 2026-06-15 04:58
+jalenC -- 2026-06-15 05:42
 - added course catalog search bar and subject filter to 4-Year Planner
 - restored saved schedule items correctly across page refresh and browser session exits by stringifying ID lookups and guarding database initialization
 - added red "Clear" button to clear individual semester boxes and return the courses to the catalog
