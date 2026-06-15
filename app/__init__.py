@@ -25,9 +25,15 @@ def disp_homepage():
 def disp_forum():
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute("SELECT id, course_code, name, subject, difficulty, workload_hours, content FROM Reviews ORDER BY id DESC")
+    c.execute("SELECT id, course_code, name, subject, difficulty, workload_hours, content FROM Reviews WHERE comment_for IS NULL ORDER BY id DESC")
     cols = [d[0] for d in c.description]
     posts = [dict(zip(cols, row)) for row in c.fetchall()]
+
+    for post in posts:
+        c.execute("SELECT id, name, content FROM Reviews WHERE comment_for = ? ORDER BY id DESC LIMIT 3", (post['id'],))
+        comment_cols = [d[0] for d in c.description]
+        post['top_comments'] = [dict(zip(comment_cols, row)) for row in c.fetchall()]
+
     db.close()
     return render_template("forum.html", posts=posts)
 
@@ -58,6 +64,47 @@ def disp_review():
             db.close()
             flash('Review posted!', 'success')
     return render_template("review.html")
+
+@app.route("/forum/<int:review_id>", methods=["GET", "POST"])
+def disp_forum_detail(review_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    c.execute("SELECT id, course_code, subject FROM Reviews WHERE id = ?", (review_id,))
+    parent = c.fetchone()
+    if not parent:
+        db.close()
+        flash('Post not found.', 'error')
+        return redirect(url_for('disp_forum'))
+
+    if request.method == 'POST':
+        content = request.form.get("content", "").strip()
+        if not content:
+            flash('Comment cannot be empty.', 'error')
+        else:
+            parent_course_code, parent_subject = parent[1], parent[2]
+            c.execute("INSERT INTO Reviews (course_code, name, subject, content, comment_for) VALUES (?, ?, ?, ?, ?)",
+                                            (parent_course_code, session.get('username'), parent_subject, content, review_id))
+            db.commit()
+            flash('Comment posted!', 'success')
+
+    c.execute("SELECT id, course_code, name, subject, difficulty, workload_hours, content, comment_for FROM Reviews WHERE id = ?", (review_id,))
+    cols = [d[0] for d in c.description]
+    row = c.fetchone()
+    post = dict(zip(cols, row))
+
+    c.execute("SELECT id, course_code, name, subject, difficulty, workload_hours, content, comment_for FROM Reviews WHERE comment_for = ? ORDER BY id ASC", (review_id,))
+    cols = [d[0] for d in c.description]
+    comments = [dict(zip(cols, row)) for row in c.fetchall()]
+
+    for comment in comments:
+        c.execute("SELECT id, name, content FROM Reviews WHERE comment_for = ? ORDER BY id DESC LIMIT 3", (comment['id'],))
+        reply_cols = [d[0] for d in c.description]
+        comment['top_replies'] = [dict(zip(reply_cols, row)) for row in c.fetchall()]
+
+    db.close()
+    return render_template("forum_detail.html", post=post, comments=comments)
+
 
 @app.route("/courses")
 def disp_courses():

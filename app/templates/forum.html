@@ -28,28 +28,41 @@ Forum
 
   {% if posts %}
     {% for post in posts %}
-    <a href="#" class="block bg-white border border-gray-200 rounded-lg shadow-sm mb-4 hover:border-teal-300 hover:shadow-md transition">
-      <div class="px-6 py-5">
-        <span class="text-xs text-green-500">{{ post.name or "Anonymous" }}</span>
-        <div class="flex items-center gap-2 mt-0.5 mb-2">
-          <span class="text-lg font-bold text-gray-900">{{ post.course_code or "Unknown Course" }}</span>
-          {% if post.subject %}
-            <span class="text-xs font-semibold bg-teal-100 text-teal-600 px-2 py-0.5 rounded-full">{{ post.subject }}</span>
+    <div class="bg-white border border-gray-200 rounded-lg shadow-sm mb-4 hover:border-teal-300 hover:shadow-md transition">
+      <a href="{{ url_for('disp_forum_detail', review_id=post.id) }}" class="block">
+        <div class="px-6 py-5">
+          <span class="text-xs text-green-500">{{ post.name or "Anonymous" }}</span>
+          <div class="flex items-center gap-2 mt-0.5 mb-2">
+            <span class="text-lg font-bold text-gray-900">{{ post.course_code or "Unknown Course" }}</span>
+            {% if post.subject %}
+              <span class="text-xs font-semibold bg-teal-100 text-teal-600 px-2 py-0.5 rounded-full">{{ post.subject }}</span>
+            {% endif %}
+          </div>
+          {% if post.difficulty or post.workload_hours %}
+          <div class="flex gap-4 mb-3 text-sm text-gray-500">
+            {% if post.difficulty %}
+              <span>Difficulty: <strong>{{ post.difficulty }}/10</strong></span>
+            {% endif %}
+            {% if post.workload_hours %}
+              <span>{{ post.workload_hours }} hrs/week</span>
+            {% endif %}
+          </div>
           {% endif %}
+          <p class="text-gray-700 text-sm line-clamp-3">{{ post.content or "" }}</p>
         </div>
-        {% if post.difficulty or post.workload_hours %}
-        <div class="flex gap-4 mb-3 text-sm text-gray-500">
-          {% if post.difficulty %}
-            <span>Difficulty: <strong>{{ post.difficulty }}/10</strong></span>
-          {% endif %}
-          {% if post.workload_hours %}
-            <span>{{ post.workload_hours }} hrs/week</span>
-          {% endif %}
-        </div>
-        {% endif %}
-        <p class="text-gray-700 text-sm line-clamp-3">{{ post.content or "" }}</p>
+      </a>
+
+      {% if post.top_comments %}
+      <div class="border-t border-gray-100 px-6 py-3 space-y-2">
+        {% for comment in post.top_comments %}
+        <a href="{{ url_for('disp_forum_detail', review_id=comment.id) }}" class="block hover:bg-gray-50 rounded px-2 py-1 -mx-2 transition">
+          <span class="text-xs text-green-500">{{ comment.name or "Anonymous" }}</span>
+          <p class="text-gray-600 text-sm line-clamp-2">{{ comment.content or "" }}</p>
+        </a>
+        {% endfor %}
       </div>
-    </a>
+      {% endif %}
+    </div>
     {% endfor %}
 
   {% else %}
