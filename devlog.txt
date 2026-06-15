@@ -177,3 +177,6 @@ alexandruC -- 2026-06-05 8:48
 
 shafinK -- 2026-06-15 00:25
 - added comments to forum 
+
+shafinK -- 2026-06-15 00:37
+- fixed prereq formatting on course page 

@@ -31,9 +31,24 @@
     {% if prereqs %}
     <div>
       <p class="text-sm font-semibold text-gray-600 mb-2">Prerequisites</p>
-      <ul class="space-y-1">
+      {% set grade_names = {9: 'Freshmen', 10: 'Sophomores', 11: 'Juniors', 12: 'Seniors'} %}
+      <ul class="space-y-1 list-disc list-inside">
         {% for req in prereqs %}
-          <li class="text-sm text-gray-700">- {{ req }}</li>
+          {% if req.type == 'grade_level' %}
+            <li class="text-sm text-gray-700">
+              Open to {% for g in req.allowed_grades %}{{ grade_names.get(g, g) }}{% if not loop.last %}, {% endif %}{% endfor %}
+            </li>
+          {% elif req.type == 'passed' %}
+            <li class="text-sm text-gray-700">Passed {{ req.courses | join(', ') }}</li>
+          {% elif req.type == 'subject_avg' %}
+            <li class="text-sm text-gray-700">Grade of &gt;{{ req.min_grade }} subject average</li>
+          {% elif req.type == 'course_grade' %}
+            <li class="text-sm text-gray-700">Grade of &gt;{{ req.min_grade }} in {{ req.course_name | title }}</li>
+          {% else %}
+            {% for part in req.text.split(',') %}
+              <li class="text-sm text-gray-700">{{ part.strip() | title }}</li>
+            {% endfor %}
+          {% endif %}
         {% endfor %}
       </ul>
     </div>
