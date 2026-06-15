@@ -160,7 +160,7 @@ alexandruC -- 2026-05-20 10:33
 - fixed last few formatting issues with design doc (fingers crossed)
 
 shafinK -- 2026-05-20 11:43
-- added condition for valid course code 
+- added condition for valid course code
 
 alexandruC -- 2026-05-21 22:54
 - added prereq html page in prepartion for d3 graph
@@ -176,14 +176,33 @@ alexandruC -- 2026-06-05 8:48
 - push work that wasn't on github
 
 shafinK -- 2026-06-15 00:25
-- added comments to forum 
+- added comments to forum
 
 shafinK -- 2026-06-15 00:37
-- fixed prereq formatting on course page 
+- fixed prereq formatting on course page
 
 shafinK -- 2026-06-15 01:00
 - added admin with ability to delete posts/comments
-- made it so you have to be logged in to access any page 
+- made it so you have to be logged in to access any page
 
 shafinK -- 2026-06-15 01:36
 - fixed prereq problem in planner
+
+jalenC -- 2026-06-15 04:58
+- added course catalog search bar and subject filter to 4-Year Planner
+- restored saved schedule items correctly across page refresh and browser session exits by stringifying ID lookups and guarding database initialization
+- added red "Clear" button to clear individual semester boxes and return the courses to the catalog
+- made the semester boxes flex so they dont overflow
+- added course code search filtering and dynamic subject dropdown list to the Forum reviews catalog
+- linked and joined Reviews with Courses table to display full course titles on reviews cards
+- logout button is now red
+- github link replaced with responsive SVG logo
+- added course code/name search bar to Graph page with dynamic search dropdown and zoom-to-node animation
+- restructured Jinja script blocks to prevent double-rendering and duplicate event listeners
+- tuned D3 map text label rendering to show course names and code
+- cloned semester 1 to semester 2 if its an annualized course
+- automatically change "1 Of 2" to "2 Of 2" and increase course code (11 -> 12, 21 -> 22, etc) for clones
+- prevent annualized courses from being put into semester 2
+- autoload saved semester 1 courses into semester 2
+- moving a semester 1 course automatically moves its semester 2 partner, and returning it to the catalog removes its partner
+- added more dynamic buttons to homepage with SVG logos

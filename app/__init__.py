@@ -40,7 +40,13 @@ def disp_homepage():
 def disp_forum():
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute("SELECT id, course_code, name, subject, difficulty, workload_hours, content FROM Reviews WHERE comment_for IS NULL ORDER BY id DESC")
+    c.execute("""
+        SELECT r.id, r.course_code, r.name, r.subject, r.difficulty, r.workload_hours, r.content, c.course_name 
+        FROM Reviews r 
+        LEFT JOIN Courses c ON r.course_code = c.course_code 
+        WHERE r.comment_for IS NULL 
+        ORDER BY r.id DESC
+    """)
     cols = [d[0] for d in c.description]
     posts = [dict(zip(cols, row)) for row in c.fetchall()]
 
@@ -56,23 +62,21 @@ def disp_forum():
 @app.route("/review", methods=["GET", "POST"])
 def disp_review():
     if request.method == 'POST':
-        course = request.form.get("course", "")
-        subject = request.form.get("subject", "")
+        course = request.form.get("course", "").strip().upper()
         difficulty = request.form.get("difficulty", 1)
         hours = request.form.get("hours", 0)
         desc = request.form.get("desc", "").strip()
-        # print("course: " + course)
-        # print("diff: " + str(difficulty))
-        # print("hours: " + str(hours))
-        # print("desc: " + desc)
         db = sqlite3.connect(DB_FILE)
         c = db.cursor()
 
-        c.execute("SELECT 1 FROM Courses WHERE course_code = ?", (course,))
-        if not c.fetchone():
+        c.execute("SELECT course_subject FROM Courses WHERE course_code = ?", (course,))
+        row = c.fetchone()
+        if not row:
             c.close()
+            db.close()
             flash('Please enter a valid course code.', 'error')
         else:
+            subject = row[0]
             c.execute("INSERT INTO Reviews (course_code, name, subject, difficulty, workload_hours, content) VALUES(?, ?, ?, ?, ?, ?)",
                                             (course, session['username'], subject, difficulty, hours, desc,))
             db.commit()
@@ -103,7 +107,12 @@ def disp_forum_detail(review_id):
             db.commit()
             flash('Comment posted!', 'success')
 
-    c.execute("SELECT id, course_code, name, subject, difficulty, workload_hours, content, comment_for FROM Reviews WHERE id = ?", (review_id,))
+    c.execute("""
+        SELECT r.id, r.course_code, r.name, r.subject, r.difficulty, r.workload_hours, r.content, r.comment_for, c.course_name 
+        FROM Reviews r 
+        LEFT JOIN Courses c ON r.course_code = c.course_code 
+        WHERE r.id = ?
+    """, (review_id,))
     cols = [d[0] for d in c.description]
     row = c.fetchone()
     post = dict(zip(cols, row))
@@ -207,23 +216,25 @@ def disp_planner():
     c.execute("SELECT * FROM Courses ORDER BY course_subject, course_code")
     cols = [d[0] for d in c.description]
     all_courses = [dict(zip(cols, row)) for row in c.fetchall()]
-    courses_by_id = {course['course_id']: course for course in all_courses}
+    courses_by_id = {str(course['course_id']): course for course in all_courses}
 
     schedule_map = {}
     scheduled_ids = set()
 
     user_id = _get_user_id(c)
     if user_id is not None:
-        c.execute("SELECT course_id, year, term FROM Schedules WHERE user_id = ?", (user_id,))
+        c.execute("SELECT course_id, year, term FROM Schedules WHERE user_id = ?", (str(user_id),))
         for course_id, year, term in c.fetchall():
-            course = courses_by_id.get(course_id)
+            course_id_str = str(course_id)
+            course = courses_by_id.get(course_id_str)
             if course:
                 schedule_map.setdefault((year, term), []).append(course)
-                scheduled_ids.add(course_id)
+                scheduled_ids.add(course_id_str)
 
     db.close()
-    catalog_courses = [course for course in all_courses if course['course_id'] not in scheduled_ids]
-    return render_template("planner.html", courses=catalog_courses, schedule_map=schedule_map)
+    catalog_courses = [course for course in all_courses if str(course['course_id']) not in scheduled_ids]
+    subjects = sorted(list(set(course['course_subject'] for course in all_courses if course.get('course_subject'))))
+    return render_template("planner.html", courses=catalog_courses, schedule_map=schedule_map, subjects=subjects)
 
 
 @app.route("/planner/save", methods=["POST"])
@@ -239,7 +250,7 @@ def save_planner():
     data = request.get_json(silent=True) or {}
     placements = data.get("placements", [])
 
-    c.execute("DELETE FROM Schedules WHERE user_id = ?", (user_id,))
+    c.execute("DELETE FROM Schedules WHERE user_id = ?", (str(user_id),))
     for placement in placements:
         course_id = placement.get("course_id")
         year = placement.get("year")
@@ -247,13 +258,15 @@ def save_planner():
         if course_id is None or year is None or term is None:
             continue
         c.execute("INSERT INTO Schedules (user_id, course_id, year, term) VALUES (?, ?, ?, ?)",
-                                          (user_id, course_id, year, term))
+                                          (str(user_id), str(course_id), year, term))
     db.commit()
     db.close()
     return jsonify({"success": True})
 
 
 if __name__ == "__main__":
-    build_db.populate_database()
+    if not os.path.exists(DB_FILE):
+        build_db.populate_database()
     app.debug = False
-    app.run()
+    port = int(os.environ.get("FLASK_RUN_PORT", 5000))
+    app.run(port=port)

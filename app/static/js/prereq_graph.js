@@ -43,12 +43,14 @@ async function createPrereqGraph() {
 
     d3.select("#graph-container").html("");
 
+    const zoom = d3.zoom().on("zoom", (e) => {
+        svgGroup.attr("transform", e.transform);
+    });
+
     const svg = d3.select("#graph-container").append("svg")
         .attr("width", width)
         .attr("height", height)
-        .call(d3.zoom().on("zoom", (e) => {
-            svgGroup.attr("transform", e.transform);
-        }));
+        .call(zoom);
     const svgGroup = svg.append("g");
     svg.append("defs").append("marker")
         .attr("id", "arrowhead")
@@ -99,7 +101,11 @@ async function createPrereqGraph() {
         .style("cursor", "grab");
 
     node.append("text")
-        .text(d => d.id)
+        .text(d => {
+            if (!d.name || d.name === "External/Unknown Course") return d.id;
+            const displayName = d.name.length > 25 ? d.name.substring(0, 25) + "..." : d.name;
+            return `${d.id}: ${displayName}`;
+        })
         .attr("x", 20)
         .attr("y", 4)
         .style("font-family", "system-ui, sans-serif")
@@ -138,6 +144,82 @@ async function createPrereqGraph() {
         d.fx = null;
         d.fy = null;
         d3.select(this).select("circle").style("cursor", "grab");
+    }
+
+    // Zoom to node function
+    function zoomToNode(nodeId) {
+        const targetNode = nodes.find(n => n.id === nodeId);
+        if (!targetNode) return;
+
+        const scale = 2.0; // Zoom factor
+        const x = width / 2 - targetNode.x * scale;
+        const y = height / 2 - targetNode.y * scale;
+
+        svg.transition()
+            .duration(750)
+            .call(zoom.transform, d3.zoomIdentity.translate(x, y).scale(scale));
+
+        // Reset all circles to default radius
+        d3.selectAll(".nodes circle").attr("r", 15);
+
+        // Pulse and highlight selected node's circle
+        d3.selectAll(".nodes g")
+            .filter(d => d.id === nodeId)
+            .select("circle")
+            .transition()
+            .duration(300)
+            .attr("r", 28)
+            .transition()
+            .duration(300)
+            .attr("r", 22);
+    }
+
+    // Graph search bar logic
+    const searchInput = document.getElementById("graph-search-input");
+    const searchDropdown = document.getElementById("graph-search-dropdown");
+
+    if (searchInput && searchDropdown) {
+        searchInput.addEventListener("input", () => {
+            const query = searchInput.value.toLowerCase().trim();
+            searchDropdown.innerHTML = "";
+            
+            if (!query) {
+                searchDropdown.classList.add("hidden");
+                return;
+            }
+
+            const matches = nodes.filter(n => 
+                n.id.toLowerCase().includes(query) || 
+                (n.name && n.name.toLowerCase().includes(query))
+            );
+
+            if (matches.length === 0) {
+                const item = document.createElement("div");
+                item.className = "px-4 py-2 text-sm text-gray-400 italic";
+                item.textContent = "No matching courses";
+                searchDropdown.appendChild(item);
+            } else {
+                matches.slice(0, 10).forEach(n => {
+                    const item = document.createElement("div");
+                    item.className = "px-4 py-2 hover:bg-teal-50 cursor-pointer text-sm text-gray-700 transition border-b border-gray-50 last:border-0";
+                    item.innerHTML = `<span class="font-bold text-teal-600">${n.id}</span> - ${n.name || 'Unknown'}`;
+                    item.addEventListener("click", () => {
+                        searchInput.value = n.id;
+                        searchDropdown.classList.add("hidden");
+                        zoomToNode(n.id);
+                    });
+                    searchDropdown.appendChild(item);
+                });
+            }
+
+            searchDropdown.classList.remove("hidden");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.add("hidden");
+            }
+        });
     }
 }
 
