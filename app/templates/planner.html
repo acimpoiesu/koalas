@@ -3,7 +3,15 @@
 {% block content %}
 <div class="flex h-screen pt-24 bg-gray-50 max-w-screen-xl mx-auto">
   <div class="w-1/3 bg-white p-6 overflow-y-auto border-r border-gray-200" id="course-list">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Course Catalog</h2>
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-xl font-bold text-gray-800">Course Catalog</h2>
+      <div class="flex items-center gap-2">
+        <span id="save-status" class="text-xs text-gray-400"></span>
+        <button id="save-planner-btn" class="bg-teal-500 hover:bg-teal-600 text-white text-sm font-bold py-1.5 px-4 rounded transition duration-200 hover:scale-105">
+          Save
+        </button>
+      </div>
+    </div>
     <p class="text-xs text-gray-500 mb-4">Drag courses into your schedule grid.</p>
     {% for course in courses %}
     <div class="draggable-course p-3 mb-2 bg-white rounded-lg shadow-sm cursor-grab border border-teal-200 hover:shadow-md hover:border-teal-400 transition"
@@ -24,7 +32,19 @@
       <div class="semester-dropzone bg-white border-2 border-dashed border-gray-300 rounded-xl p-4 min-h-[250px] transition-colors"
            data-year="{{ year }}" data-term="{{ term }}">
         <h3 class="font-bold text-gray-500 mb-4 text-sm uppercase tracking-wide">Year {{ year }} - Semester {{ term }}</h3>
+        {% for course in schedule_map.get((year, term), []) %}
+        <div class="draggable-course p-3 mb-2 bg-white rounded-lg shadow-sm cursor-grab border border-teal-200 hover:shadow-md hover:border-teal-400 transition"
+             draggable="true"
+             data-course-id="{{ course.course_id }}"
+             data-course-code="{{ course.course_code }}"
+             data-prereqs="{{ course.prereqs }}">
+          <div class="flex items-center">
+            <span class="text-xs font-mono font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded mr-3">{{ course.course_code }}</span>
+            <span class="text-sm font-medium text-gray-800">{{ course.course_name }}</span>
+          </div>
         </div>
+        {% endfor %}
+      </div>
       {% endfor %}
     {% endfor %}
   </div>
@@ -43,7 +63,7 @@
         let zoneAbsSem = getAbsoluteSemester(zone.dataset.year, zone.dataset.term);
         if (zoneAbsSem < targetAbsSem) {
           const coursesInZone = zone.querySelectorAll('.draggable-course');
-          coursesInZone.forEach(c => priorCourses.push(c.dataset.courseCode));
+          coursesInZone.forEach(c => priorCourses.push((c.dataset.courseCode || '').trim().toUpperCase()));
         }
       });
       return priorCourses;
@@ -108,13 +128,21 @@
               }
             } 
             else if (req.type === 'passed') {
-              let missing = req.courses.filter(c => !priorCourses.includes(c));
+              let missing = req.courses.filter(code => !priorCourses.includes((code || '').trim().toUpperCase()));
               if (missing.length > 0) {
                 isValid = false;
                 errorMessage = `Missing prerequisite courses: ${missing.join(', ')} in a prior semester.`;
                 break;
               }
-            } 
+            }
+            else if (req.type === 'passed_any') {
+              let hasAny = req.courses.some(code => priorCourses.includes((code || '').trim().toUpperCase()));
+              if (!hasAny) {
+                isValid = false;
+                errorMessage = `Requires one of these courses in a prior semester: ${req.courses.join(', ')}.`;
+                break;
+              }
+            }
             else if (req.type === 'raw') {
               checkGradeText(req.text);
               if (!isValid) break;
@@ -135,6 +163,37 @@
       if (draggable && this !== draggable.parentElement) {
         this.appendChild(draggable);
       }
+    });
+
+    const saveBtn = document.getElementById('save-planner-btn');
+    const saveStatus = document.getElementById('save-status');
+    saveBtn.addEventListener('click', async () => {
+      const placements = [];
+      dropzones.forEach(zone => {
+        const year = parseInt(zone.dataset.year);
+        const term = parseInt(zone.dataset.term);
+        zone.querySelectorAll('.draggable-course').forEach(course => {
+          placements.push({
+            course_id: parseInt(course.dataset.courseId),
+            year: year,
+            term: term
+          });
+        });
+      });
+
+      saveStatus.textContent = 'Saving...';
+      try {
+        const response = await fetch('{{ url_for("save_planner") }}', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ placements })
+        });
+        const data = await response.json();
+        saveStatus.textContent = (response.ok && data.success) ? 'Saved!' : (data.error || 'Failed to save.');
+      } catch (err) {
+        saveStatus.textContent = 'Failed to save.';
+      }
+      setTimeout(() => { saveStatus.textContent = ''; }, 2500);
     });
   });
 </script>

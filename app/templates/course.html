@@ -40,6 +40,8 @@
             </li>
           {% elif req.type == 'passed' %}
             <li class="text-sm text-gray-700">Passed {{ req.courses | join(', ') }}</li>
+          {% elif req.type == 'passed_any' %}
+            <li class="text-sm text-gray-700">Passed one of {{ req.courses | join(', ') }}</li>
           {% elif req.type == 'subject_avg' %}
             <li class="text-sm text-gray-700">Grade of &gt;{{ req.min_grade }} subject average</li>
           {% elif req.type == 'course_grade' %}

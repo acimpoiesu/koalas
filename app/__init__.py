@@ -194,15 +194,64 @@ def get_courses():
 def disp_prereq_graph():
     return render_template('prereqs.html')
 
+def _get_user_id(c):
+    c.execute("SELECT id FROM Users WHERE username = ?", (session.get('username'),))
+    row = c.fetchone()
+    return row[0] if row else None
+
+
 @app.route("/planner")
 def disp_planner():
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute("SELECT * FROM Courses ORDER BY course_subject, course_code")
     cols = [d[0] for d in c.description]
-    courses = [dict(zip(cols, row)) for row in c.fetchall()]
+    all_courses = [dict(zip(cols, row)) for row in c.fetchall()]
+    courses_by_id = {course['course_id']: course for course in all_courses}
+
+    schedule_map = {}
+    scheduled_ids = set()
+
+    user_id = _get_user_id(c)
+    if user_id is not None:
+        c.execute("SELECT course_id, year, term FROM Schedules WHERE user_id = ?", (user_id,))
+        for course_id, year, term in c.fetchall():
+            course = courses_by_id.get(course_id)
+            if course:
+                schedule_map.setdefault((year, term), []).append(course)
+                scheduled_ids.add(course_id)
+
     db.close()
-    return render_template("planner.html", courses=courses)
+    catalog_courses = [course for course in all_courses if course['course_id'] not in scheduled_ids]
+    return render_template("planner.html", courses=catalog_courses, schedule_map=schedule_map)
+
+
+@app.route("/planner/save", methods=["POST"])
+def save_planner():
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    user_id = _get_user_id(c)
+    if user_id is None:
+        db.close()
+        return jsonify({"error": "User not found"}), 400
+
+    data = request.get_json(silent=True) or {}
+    placements = data.get("placements", [])
+
+    c.execute("DELETE FROM Schedules WHERE user_id = ?", (user_id,))
+    for placement in placements:
+        course_id = placement.get("course_id")
+        year = placement.get("year")
+        term = placement.get("term")
+        if course_id is None or year is None or term is None:
+            continue
+        c.execute("INSERT INTO Schedules (user_id, course_id, year, term) VALUES (?, ?, ?, ?)",
+                                          (user_id, course_id, year, term))
+    db.commit()
+    db.close()
+    return jsonify({"success": True})
+
 
 if __name__ == "__main__":
     build_db.populate_database()

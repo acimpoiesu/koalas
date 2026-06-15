@@ -65,10 +65,22 @@ def create_tables():
             id               INTEGER PRIMARY KEY,
             user_id          TEXT,
             course_id        TEXT,
+            year             INTEGER,
+            term             INTEGER,
             FOREIGN KEY (user_id) REFERENCES Users(id),
             FOREIGN KEY (course_id) REFERENCES Courses(course_id)
         );
     ''')
+
+# Some prereqs refer to courses by informal/colloquial names instead of their
+# actual course codes (e.g. "PASSED AP COMP SCI" or "PASSED NEXTCS" both
+# really mean "passed AP Comp Sci A", which is course MKS21X or MKS21XH).
+# Map those phrases to the set of actual course codes that satisfy them.
+COURSE_ALIASES = {
+    "AP COMP SCI": ["MKS21X", "MKS21XH"],
+    "NEXT CS": ["MKS21X", "MKS21XH"],
+    "NEXTCS": ["MKS21X", "MKS21XH"],
+}
 
 def parse_prereqs(req_string):
     if not req_string:
@@ -86,6 +98,20 @@ def parse_prereqs(req_string):
         grades.append(12)
     if grades:
         reqs.append({"type": "grade_level", "allowed_grades": grades})
+
+    # Resolve aliased "passed X" phrases (e.g. "PASSED AP COMP SCI") to real
+    # course codes. These represent an OR: any one of the matched codes
+    # satisfies the requirement (e.g. either AP Comp Sci A or its Honors
+    # version counts as "passed AP Comp Sci").
+    passed_any_courses = set()
+    for phrase, codes in COURSE_ALIASES.items():
+        pattern = r'PASSED\s+' + re.escape(phrase)
+        if re.search(pattern, req_string):
+            passed_any_courses.update(codes)
+            req_string = re.sub(pattern, '', req_string)
+    if passed_any_courses:
+        reqs.append({"type": "passed_any", "courses": sorted(passed_any_courses)})
+
     passed_match = re.findall(r'PASSED\s+([A-Z0-9]+)', req_string)
     if passed_match:
         reqs.append({"type": "passed", "courses": passed_match})
